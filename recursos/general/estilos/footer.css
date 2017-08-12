@@ -1,0 +1,20 @@
+.lineal p { text-align:left; color:#525252; padding:10px 0; margin-bottom:0px;}
+footer{
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:40px;
+   width:100%;
+   background:#B6B6B6;
+}
+#contenido{
+    margin-top:56px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+.infoElemento{
+    margin-left: 12px;
+}
+#infoElemento{
+    color: #272727
+}
