@@ -12,8 +12,11 @@ passport = require('passport'),
   express = require('express'),
   servidor = express();
 
+var puerto=Math.floor(Math.random() * (5000 - 3000)) + 3000
 var http = require('http').Server(servidor),
-  port = process.env.PORT || 3000;
+  port = process.env.PORT || puerto;
+var archivos=null;
+
 
 //mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
@@ -86,11 +89,11 @@ servidor.use(function (err, req, res, next) {
   res.render('500', { error: err });
 });
 
-//Inicializamos el servidor
-http.listen(port);
-
 //Usa el api de electron____________________________________________________________________________________________________________________
 const { app, BrowserWindow, Menu, dialog, nativeImage } = require('electron');
+
+//Inicializamos el servidor
+http.listen(port);
 
 //Definimos que la aplicación usará electron para iniciarse___________________________________________________________________________________
 
@@ -144,7 +147,7 @@ function ventanaPrincipal() {
       cargando.close()
       mainWindow.show()    
     })
-    mainWindow.loadURL('http://127.0.0.1:3000/');
+    mainWindow.loadURL('http://127.0.0.1:'+puerto+'/');
     mainWindow.on('closed', () => { mainWindow = null });
     Menu.setApplicationMenu(menu);
     mainWindow.on('close', (event) => {
