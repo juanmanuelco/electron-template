@@ -4,5 +4,10 @@ var express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	E_DBF_USUARIO = require('../modelos/user'),
     bcrypt = require('bcryptjs');
+
+router.get('/login',function(req,res){
+    res.render('login')
+})
+
     
 module.exports = router;
