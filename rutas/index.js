@@ -8,7 +8,7 @@ function ensureAuthenticated(req, res, next) {
 		res.redirect('/users/login'); 
 	} 
 }
-
+//BLA BLA
 //De esta forma mostramos la página principal de nuestra aplicación   
 //Ya aprendi 
 router.get('/',ensureAuthenticated,function(req,res){
