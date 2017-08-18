@@ -6,7 +6,10 @@ function ensureAuthenticated(req, res, next) {
 		return next();
 	else 
 		res.redirect('/users/login');	
-}
+} 
+router.get('/ventas', function(req, res){
+	res.render('ventas');
+});
 
 
 module.exports = router;

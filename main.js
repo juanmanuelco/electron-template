@@ -18,7 +18,7 @@ var http = require('http').Server(servidor),
 var archivos=null;
 
 
-//mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
 //Si se incrementa una nueva ruta deberá ser referenciada en esta parte
 var routes = require('./rutas/index'),
@@ -140,16 +140,19 @@ var aCerrar = true;
 function ventanaPrincipal() {
   mainWindow = new BrowserWindow({ width: 1000, height: 860, icon: icono, minWidth: 1000, title: "Car de lujo" });
   let cargando = new BrowserWindow({parent: mainWindow, modal: true, show: false, frame:false})
+  mainWindow.maximize();
   cargando.once('show', () => {
     mainWindow.hide();
     mainWindow.webContents.once('dom-ready', () => {
       cargando.hide()
       cargando.close()
       mainWindow.show()    
+      
     })
     mainWindow.loadURL('http://127.0.0.1:'+puerto+'/');
     mainWindow.on('closed', () => { mainWindow = null });
     Menu.setApplicationMenu(menu);
+    
     mainWindow.on('close', (event) => {
       if (aCerrar) {
         event.preventDefault();
