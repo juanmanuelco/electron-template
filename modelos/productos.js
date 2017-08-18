@@ -11,3 +11,5 @@ var E_DBF_PRODUCTO_OBJ = mongoose.Schema({
 
 //Exporta el esquema para poder ser usado en cada ruta que sea  necesario____________________________________________________________________
 var E_DBF_PRODUCTO=module.exports=mongoose.model('E_DBF_PRODUCTO',E_DBF_PRODUCTO_OBJ);
+
+//Guardar productos
