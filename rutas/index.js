@@ -13,7 +13,7 @@ function ensureAuthenticated(req, res, next) {
 router.get('/',ensureAuthenticated,function(req,res){
     //usamos la cadena JSON despues de la coma ('index',{ESTA ES LA CADENA JSON}), con el fin de poder enviar datos desde aquí hasta el cliente
     //Para que esto funcione debemos poner {{saludo}} en el handlebars correspondiente
-    res.render('index',{saludo:'Hola a todos'})
+    res.render('index',{adios:'Ya me voy'})
 })
 
 module.exports = router;
