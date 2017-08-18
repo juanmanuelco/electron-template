@@ -12,9 +12,10 @@ passport = require('passport'),
   express = require('express'),
   servidor = express();
 
-var puerto=Math.floor(Math.random() * (5000 - 3000)) + 3000
+//var puerto=Math.floor(Math.random() * (5000 - 3000)) + 3000
+var puerto=3000;
 var http = require('http').Server(servidor),
-  port = process.env.PORT || puerto;
+port = process.env.PORT || puerto;
 var archivos=null;
 
 
