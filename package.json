@@ -1,7 +1,7 @@
 {
   "name": "prueba",
   "version": "1.0.0",
-  "description": "",
+  "description": "Plantilla nodejs para electron",
   "main": "main.js",
   "scripts": {
     "start": "electron .  node server .\\node.exe ",
@@ -26,5 +26,13 @@
   },
   "devDependencies": {
     "electron-packager": "^8.7.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanmanuelco/electron-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juanmanuelco/electron-template/issues"
+  },
+  "homepage": "https://github.com/juanmanuelco/electron-template#readme"
 }
