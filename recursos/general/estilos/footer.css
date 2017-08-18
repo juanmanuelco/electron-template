@@ -5,7 +5,7 @@ footer{
    bottom:0px;
    height:40px;
    width:100%;
-   background:#286EAF;
+   background:#3F51B5;
 }
 #contenido{
     /*margin-top:56px;*/
@@ -16,5 +16,5 @@ footer{
     margin-left: 12px;
 }
 #infoElemento{
-    color: #272727
+    color: white
 }
