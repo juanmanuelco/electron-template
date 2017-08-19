@@ -23,4 +23,9 @@ router.get('/productos',function(req,res){
 router.get('/inventario',function(req,res){
 	res.render('inventario')
 });
+
+router.get('/cliente',function(req,res){
+	res.render('cliente')
+});
+
 module.exports = router;
