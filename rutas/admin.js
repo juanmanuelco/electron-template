@@ -16,4 +16,11 @@ router.get('/control-actividades',function(req,res){
 	res.render('Control_Actividades')
 });
 
+router.get('/productos',function(req,res){
+	res.render('productos')
+});
+
+router.get('/inventario',function(req,res){
+	res.render('inventario')
+});
 module.exports = router;

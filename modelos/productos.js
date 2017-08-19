@@ -13,3 +13,15 @@ var E_DBF_PRODUCTO_OBJ = mongoose.Schema({
 var E_DBF_PRODUCTO=module.exports=mongoose.model('E_DBF_PRODUCTO',E_DBF_PRODUCTO_OBJ);
 
 //Guardar productos
+module.exports.createUser = function(newUser, callback){
+    //Establece el modo de encriptación
+	bcrypt.genSalt(10, function(err, salt) {
+        //Encripta los datos
+	    bcrypt.hash(newUser.password, salt, function(err, hash) {
+            //Devuelve una nueva contraseña (la misma ingresada pero encriptada)
+            newUser.password = hash;
+            //Genera un registro
+	        newUser.save(callback);
+	    });
+	});
+}

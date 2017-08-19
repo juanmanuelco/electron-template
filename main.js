@@ -18,9 +18,14 @@ var http = require('http').Server(servidor),
 port = process.env.PORT || puerto;
 var archivos=null;
 
+<<<<<<< HEAD
 
 mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 
+=======
+////=======================descomentar la linea de abajo para conectar a la base de datos ======================//
+//mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+>>>>>>> 8609e4664c5bde54745fcd2b8f944d51733020d7
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
 //Si se incrementa una nueva ruta deberá ser referenciada en esta parte
 var routes = require('./rutas/index'),
