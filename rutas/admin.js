@@ -6,7 +6,11 @@ function ensureAuthenticated(req, res, next) {
 		return next();
 	else 
 		res.redirect('/users/login');	
-}
+} 
+
+router.get('/ventas', function(req, res){
+	res.render('ventas');
+});
 
 router.get('/control-actividades',function(req,res){
 	res.render('Control_Actividades')
