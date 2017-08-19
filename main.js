@@ -117,6 +117,7 @@ var menu = Menu.buildFromTemplate(
 var aCerrar = true;
 function ventanaPrincipal() {
   mainWindow = new BrowserWindow({ width: 1000, height: 860, icon: icono, minWidth: 1000, title: "Car de lujo" });
+  mainWindow.maximize();
   let cargando = new BrowserWindow({parent: mainWindow, modal: true, show: false, frame:false})
   cargando.once('show', () => {
     mainWindow.hide();
