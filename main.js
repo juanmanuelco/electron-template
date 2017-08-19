@@ -19,6 +19,7 @@ var archivos=null;
 
 
 mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
 //Si se incrementa una nueva ruta deberá ser referenciada en esta parte
 var routes = require('./rutas/index'),
