@@ -8,7 +8,7 @@ function ensureAuthenticated(req, res, next) {
 		res.redirect('/users/login');	
 } 
 
-router.get('/ventas', ensureAuthenticated , function(req, res){
+router.get('/ventas', function(req, res){
 	res.render('ventas');
 });
 
