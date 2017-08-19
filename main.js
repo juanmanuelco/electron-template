@@ -12,9 +12,10 @@ passport = require('passport'),
   express = require('express'),
   servidor = express();
 
-var puerto=Math.floor(Math.random() * (5000 - 3000)) + 3000
+//var puerto=Math.floor(Math.random() * (5000 - 3000)) + 3000
+var puerto=3000;
 var http = require('http').Server(servidor),
-  port = process.env.PORT || puerto;
+port = process.env.PORT || puerto;
 var archivos=null;
 
 
@@ -105,30 +106,7 @@ let mainWindow,
 //Se define el menu principal independiente del HTML________________________________________________________________________________________
 var menu = Menu.buildFromTemplate(
   [
-    {
-      label: 'Opcion 1', /*Se colocan elementos desplegable del menú principal */
-      submenu: [
-        { label: 'Sub menu 1' }, /*Se colocan sub opciones desde aqui */
-        { label: 'Sub menu 2' }
-      ]
-    },
-    {
-      label: 'Mostrar advertencia',
-      click() {
-        dialog.showMessageBox(mainWindow,
-          {
-            title: 'Advertencia',
-            message: 'Esto es un simulacro',
-            type: 'warning',
-            noLink:true,
-            buttons: ['Aceptar', 'Cancelar']
-          },
-          (response) => {
-
-          }
-        )
-      }
-    }
+    
   ]
 )
 
@@ -140,6 +118,7 @@ var menu = Menu.buildFromTemplate(
 var aCerrar = true;
 function ventanaPrincipal() {
   mainWindow = new BrowserWindow({ width: 1000, height: 860, icon: icono, minWidth: 1000, title: "Car de lujo" });
+  mainWindow.maximize();
   let cargando = new BrowserWindow({parent: mainWindow, modal: true, show: false, frame:false})
   mainWindow.maximize();
   cargando.once('show', () => {

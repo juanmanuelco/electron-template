@@ -12,5 +12,8 @@ router.get('/ventas', ensureAuthenticated , function(req, res){
 	res.render('ventas');
 });
 
+router.get('/control-actividades',function(req,res){
+	res.render('Control_Actividades')
+});
 
 module.exports = router;

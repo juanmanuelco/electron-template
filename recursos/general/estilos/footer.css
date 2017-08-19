@@ -1,11 +1,12 @@
-.lineal p { text-align:left; color:#525252; padding:10px 0; margin-bottom:0px;}
+
 footer{
    position:fixed;
    left:0px;
+   padding-top: 4px;
    bottom:0px;
-   height:40px;
+   height:30px;
    width:100%;
-   background:#286EAF;
+   background:#3F51B5;
 }
 #contenido{
     /*margin-top:56px;*/
@@ -16,5 +17,5 @@ footer{
     margin-left: 12px;
 }
 #infoElemento{
-    color: #272727
+    color: white
 }
