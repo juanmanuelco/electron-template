@@ -103,11 +103,11 @@ let mainWindow,
   icono = nativeImage.createFromPath(path.join(__dirname, 'recursos/general/imagenes/icono.png'));
 
 //Se define el menu principal independiente del HTML________________________________________________________________________________________
-var menu = Menu.buildFromTemplate(
+/*var menu = Menu.buildFromTemplate(
   [
     
   ]
-)
+)*/
 
 //Crea la ventana principal________________________________________________________________________________________________
 //Crea la ventana principal asignándole los valores necesarios
@@ -128,7 +128,7 @@ function ventanaPrincipal() {
     })
     mainWindow.loadURL('http://127.0.0.1:'+puerto+'/');
     mainWindow.on('closed', () => { mainWindow = null });
-    Menu.setApplicationMenu(menu);
+    //Menu.setApplicationMenu(menu);
     mainWindow.on('close', (event) => {
       if (aCerrar) {
         event.preventDefault();
