@@ -10,7 +10,7 @@ function ensureAuthenticated(req, res, next) {
 }
 //BLA BLA
 //De esta forma mostramos la página principal de nuestra aplicación   
-//Ya aprendi mucho
+//Ya aprendi muchoddsada
 router.get('/',function(req,res){
     //usamos la cadena JSON despues de la coma ('index',{ESTA ES LA CADENA JSON}), con el fin de poder enviar datos desde aquí hasta el cliente
     //Para que esto funcione debemos poner {{saludo}} en el handlebars correspondiente
