@@ -373,4 +373,60 @@ Funciones["deleteEmpleado"] = function () {
 	}); 
 }
 
+Funciones["NumDecimal"] = function(e){
+	var key = window.Event ? e.which : e.keyCode
+    if((key >= 48 && key <= 57) || key==44){
+		var ekey=String.fromCharCode(key)|| "";
+		if(key==44){ekey=","}
+		var numero = this.value + "" + ekey;
+		var span = this.parentNode.getElementsByTagName("span")[0]
+		if (Timers[this]) {
+			clearTimeout(Timers[this]);}
+		;
+		if(validarnum(numero,span)){
+			Timers[this] = setTimeout(function (a){
+				a.parentNode.classList.remove("is-invalid");
+			},1,this);
+		}
+		else{
+			Timers[this] = setTimeout(function (a){
+				a.parentNode.classList.add("is-invalid");
+			},1,this);
+		}
+        return true;
+    }
+    else{
+		e.preventDefault();
+        return false;
+    }
+}
+
+Funciones["NumeroEntero"] = function(e){
+	var key = window.Event ? e.which : e.keyCode
+    if((key >= 48 && key <= 57)){
+		var ekey=String.fromCharCode(key)|| "";
+		
+		var numero = this.value + "" + ekey;
+		var span = this.parentNode.getElementsByTagName("span")[0]
+		if (Timers[this]) {
+			clearTimeout(Timers[this]);}
+		;
+		if(validarnum(numero,span)){
+			Timers[this] = setTimeout(function (a){
+				a.parentNode.classList.remove("is-invalid");
+			},1,this);
+		}
+		else{
+			Timers[this] = setTimeout(function (a){
+				a.parentNode.classList.add("is-invalid");
+			},1,this);
+		}
+        return true;
+    }
+    else{
+		e.preventDefault();
+        return false;
+    }
+}
+
 Funciones.init();
