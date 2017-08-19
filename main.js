@@ -105,30 +105,7 @@ let mainWindow,
 //Se define el menu principal independiente del HTML________________________________________________________________________________________
 var menu = Menu.buildFromTemplate(
   [
-    {
-      label: 'Opcion 1', /*Se colocan elementos desplegable del menú principal */
-      submenu: [
-        { label: 'Sub menu 1' }, /*Se colocan sub opciones desde aqui */
-        { label: 'Sub menu 2' }
-      ]
-    },
-    {
-      label: 'Mostrar advertencia',
-      click() {
-        dialog.showMessageBox(mainWindow,
-          {
-            title: 'Advertencia',
-            message: 'Esto es un simulacro',
-            type: 'warning',
-            noLink:true,
-            buttons: ['Aceptar', 'Cancelar']
-          },
-          (response) => {
-
-          }
-        )
-      }
-    }
+    
   ]
 )
 
