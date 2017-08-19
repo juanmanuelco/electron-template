@@ -5,12 +5,12 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 //Se define un esquema de como iran los datos guardados_______________________________________________________________________________________
-var E_DBF_VENTA_OBJ  = mongoose.Schema({
-
+var EMAEVENTINV_OBJ  = mongoose.Schema({
+	//
 });
 
 //Exporta el esquema para poder ser usado en cada ruta que sea  necesario____________________________________________________________________
-var E_DBF_VENTA = module.exports = mongoose.model('E_DBF_VENTA', E_DBF_VENTA_OBJ );
+var EMAEVENTINV = module.exports = mongoose.model('EMAEVENTINV', EMAEVENTINV_OBJ );
 
 //Crea un nuevo usuario para que use el sistema_______________________________________________________________________________________________
 module.exports.createUser = function(newUser, callback){
@@ -29,12 +29,12 @@ module.exports.createUser = function(newUser, callback){
 //Para poder usar la encriptación es necesario usar estas líneas______________________________________________________________________________
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
-	E_DBF_VENTA.findOne(query, callback);
+	EMAEVENTINV.findOne(query, callback);
 }
 
 //MONGODB usa su propia indexación por lo que es necesario obtener el id del registro_________________________________________________________
 module.exports.getUserById = function(id, callback){
-	E_DBF_VENTA.findById(id, callback);
+	EMAEVENTINV.findById(id, callback);
 }
 
 //Esto es para el login, sirve para comparar la contraseña ingresada con la que esta en el sistema____________________________________________
