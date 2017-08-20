@@ -14,6 +14,9 @@ var E_DBF_PRODUCTO_OBJ = mongoose.Schema({
 var E_DBF_PRODUCTO=module.exports=mongoose.model('E_DBF_PRODUCTO',E_DBF_PRODUCTO_OBJ);
 
 //Guardar productos
+
+//Esto no se hace ._.
+/*
 module.exports.createProductos = function(req,res){
     var parametros= req.body
     //json de producto
@@ -30,3 +33,4 @@ module.exports.createProductos = function(req,res){
 	    
 	//});
 }
+*/
