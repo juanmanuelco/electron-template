@@ -500,11 +500,11 @@ Funciones["NumeroEntero"] = function(e){
 //funcion para abrir un modal en la asignacion de empleados
 Funciones["AsignacionTarea"] = function (e) {
 	var formhtml = '<label>Contador de Servicio</label> <input class="mdl-textfield__input" type="number" readonly><br>'+
-	'<label>Cédula del Empleado</label> <input  class="mdl-textfield__input" type="number" placeholder="Ingrese dato"><br>'+
+	'<label>Cédula del Empleado</label> <input  class="mdl-textfield__input" type="number" ><br>'+
 	'<label>Fecha de asignación del servicio</label> <input  class="mdl-textfield__input" type="date" step="1" min="2017-08-01" max="2030-12-31"><br>'+
 	'<label>Hora de asignación del servicio</label> <input  class="mdl-textfield__input" type="time"><br>'+
 	'<label>Hora de Finalización del servicio</label> <input   class="mdl-textfield__input"type="time"><br>'+
-	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" placeholder="Ingrese dato"><br>'+
+	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" ><br>'+
 	'<label>Descripción del servicio </label><br><textarea  cols="60" rows="10"></textarea>';
 	swal({
 		  	title: 'Tarea Empleado',
@@ -533,7 +533,8 @@ Funciones["AsignacionTarea"] = function (e) {
 		});
 }
 
-Funciones["LibrarTarea"] = function(none){
+//función para liberar tarea
+Funciones["LibrarTarea"] = function(){
 	swal({
 		title: 'Desocupar Empleado',
 		text: "¿Estás Seguro de hacer esto?",
@@ -542,12 +543,12 @@ Funciones["LibrarTarea"] = function(none){
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Estoy de acuerdo'
-	}).then(function (none) {
-		swal(
-			'¡Estupendo!',
-			'Este empleado está Desocupado'
-		)
-	});
+	},
+	function(isConfirm) {
+		if (isConfirm) {
+		  location.reload(); 
+		}
+  	});
 }
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
