@@ -507,7 +507,7 @@ Funciones["AsignacionTarea"] = function (e) {
 	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" placeholder="Ingrese dato"><br>'+
 	'<label>Descripción del servicio </label><br><textarea  cols="60" rows="10"></textarea>';
 	swal({
-		  	title: 'Datos Producto',
+		  	title: 'Tarea Empleado',
 		 	html: formhtml,
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Asignar',
@@ -517,7 +517,7 @@ Funciones["AsignacionTarea"] = function (e) {
 		function(isConfirm) {
 		  	if (isConfirm) {
 		    	swal({
-			  	title: '¿Seguro que desea modificar los datos del Empleado?',
+			  	title: '¿Seguro que desea asignar una tarea al Empleado?',
 			  	type: 'warning',
 			  	showCancelButton: true,
 			  	confirmButtonText: 'Si',
@@ -531,6 +531,23 @@ Funciones["AsignacionTarea"] = function (e) {
 			}); 
 		  	}
 		});
+}
+
+Funciones["LibrarTarea"] = function(none){
+	swal({
+		title: 'Desocupar Empleado',
+		text: "¿Estás Seguro de hacer esto?",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Estoy de acuerdo'
+	}).then(function (none) {
+		swal(
+			'¡Estupendo!',
+			'Este empleado está Desocupado'
+		)
+	});
 }
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
