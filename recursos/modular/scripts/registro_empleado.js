@@ -1,0 +1,66 @@
+
+ValorOriginal={}
+function ValidarDatosFormulario(formulario) {
+	console.log(formulario)
+	var inputs = formulario.getElementsByTagName("input");
+	mensaje="";
+	formNoValido=false;
+	for (var i = 0; i < inputs.length; i++) {
+		if(inputs[i].value.trim() == ""){
+			var span = inputs[i].parentNode.getElementsByTagName("span");
+			console.log(span)
+			if (span.length>=1) {
+				span=span[0]
+				ValorOriginal[inputs[i]] = span.innerHTML;
+				span.innerHTML="Campo Vacío"
+			};
+			inputs[i].addEventListener("focus", function(){
+				var span = this.parentNode.getElementsByTagName("span");
+				if (span) {span[0].innerHTML=ValorOriginal[this]};
+				this.parentNode.classList.remove("is-invalid");
+			 })
+			inputs[i].parentNode.classList.add("is-invalid");
+			formNoValido=true;
+			mensaje="Por favor asegurese que no haya campos vacios";
+		}
+	};
+	
+	
+	var divs = formulario.getElementsByTagName("div")
+	for (var i = 0; i < divs.length; i++) {
+		if(divs[i].classList.contains("is-invalid")){
+			mensaje="Por favor asegurese que todos los datos estén correctos";
+			formNoValido=true;
+		}
+	};
+
+	if (formNoValido) {
+		swal({
+		  	title: 'Formulario No Válido',
+		  	type: 'warning',
+		  	text:mensaje,
+		  	confirmButtonText: 'Ok',
+		  	closeOnConfirm: false
+		})
+		return false;
+	};
+
+	swal({
+		  	title: 'Formulario Válido',
+		  	type: 'info',
+		  	text:"Se guardarán los datos correctamente",
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Ok',
+		  	closeOnConfirm: true
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		  		return true;
+		  		//location.reload();
+		  	}
+		  	else{
+		  		return false;
+		  	}
+		});
+	return true;
+}

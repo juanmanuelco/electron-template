@@ -1,7 +1,6 @@
 
 function validarnum(numero,span){
     numero = numero.replace(",", ".")
-    document.getElementById("mensajePV").innerHTML
     if (!isNaN(numero)){
         var array = numero.split(".")
             if(array[1] && array[1].length > 2){
@@ -12,6 +11,8 @@ function validarnum(numero,span){
             }
         return true;
     }
-    span.innerHTML="Ingrese solo valores numericos";
+    if (span) {
+        span.innerHTML="Ingrese solo valores numericos";
+    };
     return false
 }

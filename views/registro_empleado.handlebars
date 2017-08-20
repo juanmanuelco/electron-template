@@ -1,0 +1,151 @@
+<section class="full-width pageContent">
+	<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+		<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+					<div class="full-width panel mdl-shadow--2dp">
+						<div class="full-width panel-tittle bg-primary text-center tittles">
+							Nuevo Empleado
+						</div>
+						<div class="full-width panel-content">
+							<form>
+								
+								<div class="mdl-grid">
+									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" style="font-size:20px;">Cédula</label>
+											<input class="mdl-textfield__input" type="number" pattern="-?[0-9- ]*(\.[0-9]+)?" id="Cedula" validation="cedula" event="keyup" solonum="true">
+											<label class="mdl-textfield__label" for="Cedula"></label>
+											<span class="mdl-textfield__error">Ingrese Solo Números en Cédula</span>
+							    		</div>
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" style="font-size:20px;">Nombre</label>
+											<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="Nombre">
+											<label class="mdl-textfield__label" for="Nombre"></label>
+											<span class="mdl-textfield__error">Ingrese solo letras </span>
+										</div>
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" style="font-size:20px;">Teléfono</label>
+											<input class="mdl-textfield__input" type="number" pattern="-?[0-9+()-]*(\.[0-9]+)?" id="Telefono" solonum="true">
+											<label class="mdl-textfield__label" for="Telefono"></label>
+											<span class="mdl-textfield__error">Ingrese solo números</span>
+										</div>
+									</div>
+									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" id="Turno" style="font-size:20px;">Turno</label>
+											<select class="mdl-textfield__input">
+												<option>Matutino</option>
+												<option>Vespertino</option>
+												<option>Nocturno</option>
+											</select>
+										</div>
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" id="Estado" style="font-size:20px;">Estado</label>
+											<select class="mdl-textfield__input">
+												<option>Disponible</option>
+												<option>No Disponible</option>
+											</select>
+										</div>
+										<div>
+                            	  	    	<button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="GuardarEmpleado" validation="saveEmpleado" event="click">Guardar</button>
+	                                       	<button id="btn-upClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="Consultar" validation="ocultarmostrar" mostrarID="divTabla" ocultarID="tabNewAdmin" event="click" title="Mostrar Cliente Registrados">Ver Empleados Registrados</button>
+                                       </div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="full-width divider-menu-h"></div>
+		<div class="mdl-grid" id="divTabla" style="display:none;">
+			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+				<form action="#">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+						<label class="mdl-button mdl-js-button mdl-button--icon" for="searchPayment">
+							<i class="zmdi zmdi-search"></i>
+						</label>
+						<div class="mdl-textfield__expandable-holder">
+							<input class="mdl-textfield__input" type="text" id="searchPayment" validation="buscarTabla" event="keyup" TablaID="tblPersonas" datos="0,1,3" placeholder=" Buscar">
+							<label class="mdl-textfield__label"></label>
+						</div>
+					</div>
+				</form>
+				<div style="overflow-x:auto;">				
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tblPersonas">
+						<thead>
+							<tr>
+								<th>Cedula</th>
+								<th>Nombre</th>
+								<th>Telefono</th>
+								<th>Turno</th>
+								<th>Estado</th>
+								<th><center>Opcion</center></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1309953576</td>
+								<td>Francisco Xavier Bermello López</td>
+								<td>0991067939</td>
+								<td>Matutino</td>
+								<td>Disponible</td>
+								<td id="tr1">
+									<div style="display:block;" id="div1">
+										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>1316455524</td>
+								<td>Maritza Jenifer Moreira Mera</td>
+								<td>0900000000</td>
+								<td>Vespertino</td>
+								<td>Disponible</td>
+								<td id="tr2">
+									<div style="display:block;">
+										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>1316458650</td>
+								<td>Andy Lenin Castillo de Arteaga</td>
+								<td>09999999</td>
+								<td>Nocturno</td>
+								<td>No Disponible</td>
+								<td id="tr2">
+									<div style="display:block;">
+										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>1312718800</td>
+								<td>Jose Cedeño</td>
+								<td>4567845678</td>
+								<td>Matutino</td>
+								<td>No Dispoinible</td>
+								<td id="tr2">
+									<div style="display:block;">
+										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<center>
+	           <button id="btn-addClient"  title="Registrar nuevo Cliente" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5;" validation="ocultarmostrar" ocultarID="divTabla" mostrarID="tabNewAdmin" event="click">Nuevo Registro</button>
+	       	</center>
+		</div>
+</section>
+<script src="../modular/scripts/registro_empleado.js" ></script>
+<script src="../modular/scripts/indentificaciones.js" ></script>
+<script src="../modular/scripts/validacionPrecios.js" ></script>
+<script src="../modular/scripts/validation.js" ></script>

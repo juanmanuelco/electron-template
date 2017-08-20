@@ -32,4 +32,8 @@ router.get('/cliente',function(req,res){
 	res.render('cliente')
 });
 
+router.get('/registro_empleado',function(req,res){
+	res.render('registro_empleado')
+});
+
 module.exports = router;

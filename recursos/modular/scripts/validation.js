@@ -127,6 +127,12 @@ Funciones["init"] = function (argument) {
 				return false;
 			});*/
 		}
+		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
+		//funciones mientras se usa otra como por ejemplo cedula
+		var solonum = elements[i].getAttribute("solonum") || false;
+		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
+		var solodecimal = elements[i].getAttribute("solodecimal") || false;
+		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
 	}
 }
 
@@ -391,6 +397,18 @@ Funciones["editEmpleado"] = function () {
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
+		  		var divs = document.getElementsByTagName("div")
+		  		var form;
+		  		for (var i = 0; i < divs.length; i++) {
+		  			if (divs[i].className=="sweet-content") {
+		  				form=divs[i].firstChild
+		  				break;
+		  			};
+		  		};
+		  		var bool = ValidarDatosFormulario(form)
+		  		if (form && !bool) {
+		  			return false;
+		  		};
 		    	swal({
 			  	title: '¿Seguro que desea modificar los datos del Empleado?',
 			  	type: 'warning',
@@ -398,14 +416,19 @@ Funciones["editEmpleado"] = function () {
 			  	confirmButtonText: 'Si',
 			  	cancelButtonText:'No'
 
-			},
-			function(isConfirm) {
-			  	if (isConfirm) {
-			    	location.reload(); 
-			  	}
-			}); 
+				},
+				function(isConfirm) {
+				  	if (isConfirm) {
+						location.reload(); 
+				  	}
+				}); 
 		  	}
 		});
+}
+
+Funciones["saveEmpleado"] = function(e){
+	e.preventDefault();
+	ValidarDatosFormulario(this.form);
 }
 
 //funcion unicamente llamada en el modulo de empleado
