@@ -1,6 +1,6 @@
 var express = require('express'), 
     router = express.Router();
-
+	var EMAEVENTINV_OBJ=require('../modelos/productos')
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) 
 		return next();
@@ -20,6 +20,18 @@ router.get('/control-actividades',function(req,res){
 //renderiza en la ruta /productos la vista productos 
 router.get('/productos',function(req,res){
 	res.render('productos')
+});
+router.post('/productos',function(req,res){
+	
+	var nuevoProducto=new EMAEVENTINV_OBJ({
+	})
+	nuevoProducto.save(function(error,resp){
+		if(error){
+			res.render('500',{error:error})
+		}else{
+			res.render('productos',{success_msg:'Guardado'})
+		}
+	})
 });
 //renderiza en la ruta inventario la vista inventario
 router.get('/inventario',function(req,res){
