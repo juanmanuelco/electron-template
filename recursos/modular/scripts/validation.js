@@ -497,5 +497,41 @@ Funciones["NumeroEntero"] = function(e){
     }
 }
 
+//funcion para abrir un modal en la asignacion de empleados
+Funciones["AsignacionTarea"] = function (e) {
+	var formhtml = '<label>Contador de Servicio</label> <input class="mdl-textfield__input" type="number" readonly><br>'+
+	'<label>Cédula del Empleado</label> <input  class="mdl-textfield__input" type="number" placeholder="Ingrese dato"><br>'+
+	'<label>Fecha de asignación del servicio</label> <input  class="mdl-textfield__input" type="date" step="1" min="2017-08-01" max="2030-12-31"><br>'+
+	'<label>Hora de asignación del servicio</label> <input  class="mdl-textfield__input" type="time"><br>'+
+	'<label>Hora de Finalización del servicio</label> <input   class="mdl-textfield__input"type="time"><br>'+
+	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" placeholder="Ingrese dato"><br>'+
+	'<label>Descripción del servicio </label><br><textarea  cols="60" rows="10"></textarea>';
+	swal({
+		  	title: 'Datos Producto',
+		 	html: formhtml,
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Asignar',
+		  	cancelButtonText: 'Atrás',
+		  	closeOnConfirm: false
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		    	swal({
+			  	title: '¿Seguro que desea modificar los datos del Empleado?',
+			  	type: 'warning',
+			  	showCancelButton: true,
+			  	confirmButtonText: 'Si',
+			  	cancelButtonText:'No'
+
+			},
+			function(isConfirm) {
+			  	if (isConfirm) {
+			    	location.reload(); 
+			  	}
+			}); 
+		  	}
+		});
+}
+
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();

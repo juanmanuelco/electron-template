@@ -1,97 +1,50 @@
 <section class="full-width pageContent">
-	<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-		<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
-			<div class="mdl-grid">
-				<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-					<div class="full-width panel mdl-shadow--2dp">
-						<div class="full-width panel-tittle bg-primary text-center tittles">
-							ASIGNACION DE EMPLEADOS
-						</div>
 
-						<div class="full-width panel-content"><br>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+                    <div class="full-width panel mdl-shadow--2dp">
+                        <div class="full-width panel-tittle bg-primary text-center tittles">
+                            ASIGNACION DE EMPLEADOS
+                        </div>
 
-						<div class="  text-center tittles">
+                        <div class="full-width panel-content"><br>
 
-						Haga Click sobre el empleado para asignar tarea
-						</div>
-							<form>
-								<div class="mdl-grid" class="container">
-									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-										<h5 class="text-condensedLight">DISPONIBLES</h5>
-										<//label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-											<//input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
-											<img src="../general/imagenes/avatar-male.png" alt="avatar" style="height: 45px; width="45px;" ">
-											<span class="mdl-radio__label" data-toggle="modal" data-target="#myModal">Delgado Jean Carlos</span>
-											<!-- Modal -->
-											<div class="modal fade" id="myModal" role="dialog" >
-												<div class="modal-dialog">
-												
-												<!-- Modal content-->
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">Empleado Libre</h4>
-													</div>
-													<div class="modal-body">
-														Contador de Servicio <input type="number" readonly><br>
-														Cédula del Empleado <input type="number"><br>
-														Fecha de asignación del servicio <input type="date"><br>
-														Hora de asignación del servicio <input type="time"><br>
-														Hora de Finalización del servicio <input type="time"><br>
-														RUC/Cédula Cliente <input type="number"><br>
-														Descripción del servicio <input type=<textarea name="" id="" cols="30" rows="10"></textarea><br>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default" data-dismiss="modal">Asignar</button>
-													</div>
-												</div>
-												
-												</div>
-											</div>
-										</label>
-									
-									</div>
+                        <div class="  text-center tittles">
 
-									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-										<h5 class="text-condensedLight">NO DISPONIBLES</h5>
-										<//label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-5">
-											<//input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
-											<img src="../general/imagenes/avatar-male.png" alt="avatar" style="height: 45px; width="45px;" ">
-											<span class="mdl-radio__label" data-toggle="modal" data-target="#myModal2">Danny Lucas</span>
-											<!-- Modal -->
-											<div class="modal fade" id="myModal2" role="dialog">
-												<div class="modal-dialog">
-													<!-- Modal content-->
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">Empleado Ocupado</h4>
-														</div>
-														<div class="modal-body">
-															<center><button>Desocupar Empleado</button></center>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default" data-dismiss="modal">Atras</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</label>										
-									</div>
-								</div>
-								<!-- Botones del Formulario-->		
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
+                        Haga Click sobre el empleado para asignar tarea
+                        </div>
+                            <form>
+                                <div class="mdl-grid" class="container">
+                                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+                                        <h5 class="text-condensedLight">DISPONIBLES</h5>
+                                            <div validation="AsignacionTarea" event="click">
+                                                <img src="../general/imagenes/avatar-male.png" alt="avatar" style="height: 45px; width=45px;">
+                                                <span class="mdl-radio__label" data-toggle="modal" data-target="#myModal">Delgado Jean Carlos</span>
+                                            </div>
+                                    
+                                    </div>
+
+                                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+                                        <h5 class="text-condensedLight">NO DISPONIBLES</h5>
+                                            <div validation="AsignacionTarea" event="click">
+                                                <img src="../general/imagenes/avatar-male.png" alt="avatar" style="height: 45px; width=45px; ">
+                                                <span class="mdl-radio__label">Danny Lucas</span>  
+                                            </div>                                
+                                    </div>
+                                </div>
+                                <!-- Botones del Formulario-->      
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </section>
 
 <script>
-	window.addEventListener('load',function(){
-		$(".modal-backdrop").remove();
-	});
+    window.addEventListener('load',function(){
+        $(".modal-backdrop").remove();
+    });
 </script>
-
