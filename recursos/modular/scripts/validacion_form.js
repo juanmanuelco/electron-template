@@ -1,14 +1,15 @@
-
+//si se va a usar esta funcion para validar formularios en lo posible
+// se recomienda cargar el script antes de los scripts siguientes:
+//indentificaciones.js
+//validation.js
 ValorOriginal={}
 function ValidarDatosFormulario(formulario) {
-	console.log(formulario)
 	var inputs = formulario.getElementsByTagName("input");
 	mensaje="";
 	formNoValido=false;
 	for (var i = 0; i < inputs.length; i++) {
 		if(inputs[i].value.trim() == ""){
 			var span = inputs[i].parentNode.getElementsByTagName("span");
-			console.log(span)
 			if (span.length>=1) {
 				span=span[0]
 				ValorOriginal[inputs[i]] = span.innerHTML;
@@ -44,23 +45,5 @@ function ValidarDatosFormulario(formulario) {
 		})
 		return false;
 	};
-
-	swal({
-		  	title: 'Formulario Válido',
-		  	type: 'info',
-		  	text:"Se guardarán los datos correctamente",
-		  	showCancelButton: true,
-		  	confirmButtonText: 'Ok',
-		  	closeOnConfirm: true
-		},
-		function(isConfirm) {
-		  	if (isConfirm) {
-		  		return true;
-		  		//location.reload();
-		  	}
-		  	else{
-		  		return false;
-		  	}
-		});
 	return true;
 }

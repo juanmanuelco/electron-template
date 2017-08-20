@@ -428,7 +428,27 @@ Funciones["editEmpleado"] = function () {
 
 Funciones["saveEmpleado"] = function(e){
 	e.preventDefault();
-	ValidarDatosFormulario(this.form);
+	var bool = ValidarDatosFormulario(this.form);
+	if (bool){ 
+
+	swal({
+		  	title: 'Formulario Válido',
+		  	type: 'info',
+		  	text:"Se guardarán los datos correctamente",
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Ok',
+		  	closeOnConfirm: true
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		  		return true;
+		  		//location.reload();
+		  	}
+		  	else{
+		  		return false;
+		  	}
+		});
+	}
 }
 
 //funcion unicamente llamada en el modulo de empleado
