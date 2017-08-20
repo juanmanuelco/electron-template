@@ -520,5 +520,59 @@ Funciones["NumeroEntero"] = function(e){
     }
 }
 
+//funcion para abrir un modal en la asignacion de empleados
+Funciones["AsignacionTarea"] = function (e) {
+	var formhtml = '<label>Contador de Servicio</label> <input class="mdl-textfield__input" type="number" readonly><br>'+
+	'<label>Cédula del Empleado</label> <input  class="mdl-textfield__input" type="number" ><br>'+
+	'<label>Fecha de asignación del servicio</label> <input  class="mdl-textfield__input" type="date" step="1" min="2017-08-01" max="2030-12-31"><br>'+
+	'<label>Hora de asignación del servicio</label> <input  class="mdl-textfield__input" type="time"><br>'+
+	'<label>Hora de Finalización del servicio</label> <input   class="mdl-textfield__input"type="time"><br>'+
+	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" ><br>'+
+	'<label>Descripción del servicio </label><br><textarea  cols="60" rows="10"></textarea>';
+	swal({
+		  	title: 'Tarea Empleado',
+		 	html: formhtml,
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Asignar',
+		  	cancelButtonText: 'Atrás',
+		  	closeOnConfirm: false
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		    	swal({
+			  	title: '¿Seguro que desea asignar una tarea al Empleado?',
+			  	type: 'warning',
+			  	showCancelButton: true,
+			  	confirmButtonText: 'Si',
+			  	cancelButtonText:'No'
+
+			},
+			function(isConfirm) {
+			  	if (isConfirm) {
+			    	location.reload(); 
+			  	}
+			}); 
+		  	}
+		});
+}
+
+//función para liberar tarea
+Funciones["LibrarTarea"] = function(){
+	swal({
+		title: 'Desocupar Empleado',
+		text: "¿Estás Seguro de hacer esto?",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Estoy de acuerdo'
+	},
+	function(isConfirm) {
+		if (isConfirm) {
+		  location.reload(); 
+		}
+  	});
+}
+
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();
