@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	swal({
+	  	title: 'Empleado registrado con éxito',
+	  	type: 'info',
+	  	confirmButtonText: 'Ok',
+	  	closeOnConfirm: false
+		},
+		function(isConfirm) {
+			if (isConfirm) { 
+			location.href="/admin/registro_empleado"
+		  	}
+		}
+		)
+</script>

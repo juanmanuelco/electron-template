@@ -8,26 +8,26 @@
 								Ventas de Productos
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form action="/admin/ventas" method="post">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5>Datos de la Venta</h5>
 											<br>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Factura N°:</label>
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
+												<input name="codigo_venta" class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
 												<label class="mdl-textfield__label" for="DNIAdmin"></label>
 												<span class="mdl-textfield__error">Numero Invalido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Fecha de la Venta</label>
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameAdmin">
+												<input name="fecha" class="mdl-textfield__input" type="text" id="NameAdmin">
 												<label class="mdl-textfield__label" for="NameAdmin"></label>
 												<span class="mdl-textfield__error">Nombre invalido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Cédula del Cliente</label>
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneAdmin">
+												<input name="cedula" class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneAdmin">
 												<label class="mdl-textfield__label" for="phoneAdmin"></label>
 												<span class="mdl-textfield__error">Numero de telfono inavalido</span>
 											</div>
@@ -43,7 +43,7 @@
 											<br>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Código del Producto</label>
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin">
+												<input name="codigo_producto" class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin">
 												<label class="mdl-textfield__label" for="UserNameAdmin"></label>
 												<span class="mdl-textfield__error">Nombre de usuario invalido</span>
 											</div>
@@ -68,6 +68,7 @@
 												<span class="mdl-textfield__error">Contraseña invalida</span>
 											</div>
 											<div >
+												<input type="submit" value="Guardar">
                                             	<button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Guardar</button>
 	                                            <button id="btn-updClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Modificar</button>
 	                                            <button id="btn-seaClient"  class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Buscar</button>
