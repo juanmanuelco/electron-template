@@ -15,7 +15,7 @@
 											<br>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Factura N°:</label>
-												<input name="codigo_venta" class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
+												<input value="{{incrementar}}" name="codigo_venta" class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
 												<label class="mdl-textfield__label" for="DNIAdmin"></label>
 												<span class="mdl-textfield__error">Numero Invalido</span>
 											</div>
@@ -24,10 +24,12 @@
 												<input name="fecha" class="mdl-textfield__input" type="text" id="NameAdmin">
 												<label class="mdl-textfield__label" for="NameAdmin"></label>
 												<span class="mdl-textfield__error">Nombre invalido</span>
+
+												
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Cédula del Cliente</label>
-												<input name="cedula" class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneAdmin">
+												<input value="" name="cedula" class="mdl-textfield__input" type="text"  id="phoneAdmin">
 												<label class="mdl-textfield__label" for="phoneAdmin"></label>
 												<span class="mdl-textfield__error">Numero de telfono inavalido</span>
 											</div>
@@ -68,15 +70,17 @@
 												<span class="mdl-textfield__error">Contraseña invalida</span>
 											</div>
 											<div >
-												<input type="submit" value="Guardar">
-                                            	<button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Guardar</button>
+												<!--<input type="submit" value="Guardar" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">
 	                                            <button id="btn-updClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Modificar</button>
 	                                            <button id="btn-seaClient"  class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Buscar</button>
 	                                            <button id="btn-delClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Eliminar</button>
-                                            </div>
+												-->
+										    </div>
+											
 										</div>
 									</div>
 								</form>
+								<button id="btn-delClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Añadir Producto</button>
 							</div>
 						</div>
 					</div>
@@ -97,78 +101,18 @@
 						</div>
 					</form>
 					<div style="overflow-x:auto;">				
-						<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tblPersonas">
+						<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tblProductos">
 							<thead>
 								<tr>
-									<th>Ruc/Cedula</th>
-									<th>Nombre</th>
-									<th>Direccion</th>
-									<th>Número Convencional</th>
-									<th>Correo Electronico</th>
-									<th>Tipo Cliente</th>
-									<th>Porcentaje Descuento</th>
-									<th><center>Opcion</center></th>
+									<th>Codigo de Producto</th>
+									<th>Descripción</th>
+									<th>Precio</th>
+									<th>Cantidad</th>
+									<th>Valor a Pagar</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1309953576001</td>
-									<td>Francisco Xavier Bermello López</td>
-									<td>Calle 17 av 25 y 26</td>
-									<td>5003572</td>
-									<td>juniorcede2@hotmail.com</td>
-									<td>Premium</td>
-									<td>50 %</td>
-									<td id="tr1">
-										<div style="display:block;" id="div1">
-											<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>1316455524001</td>
-									<td>Maritza Jenifer Moreira Mera</td>
-									<td>Manta</td>
-									<td>5003572</td>
-									<td>correo@correo.com</td>
-									<td>Ocasional</td>
-									<td>0</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>1316458650</td>
-									<td>Andy Lenin Castillo de Arteaga</td>
-									<td>Montecristi</td>
-									<td>231937</td>
-									<td>correo@correo.com</td>
-									<td>Premium</td>
-									<td>5</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>1312718800</td>
-									<td>Jose Cedeño</td>
-									<td>Manta</td>
-									<td>5003572</td>
-									<td>correo@correo.com</td>
-									<td>Standar</td>
-									<td>0</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
+							<tbody id="contenido">
+								
 							</tbody>
 						</table>
 					</div>
@@ -179,4 +123,3 @@
 			</div>
 		</div>
 	</section>
-

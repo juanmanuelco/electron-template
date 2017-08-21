@@ -12,7 +12,8 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.get('/ventas', function (req, res) {
-	res.render('ventas');
+	//res.render('ventas');
+	res.render('ventas',{incrementar:"00001"})	
 });
 
 router.post('/ventas', function (req, res) {
