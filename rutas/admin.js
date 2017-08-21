@@ -1,6 +1,6 @@
 var express = require('express'),
 	venta_model = require("../modelos/ventas");
-EMAEVENTINV_OBJ = require('../modelos/productos')
+	E_DBF_PRODUCTO_OBJ = require('../modelos/productos')
 E_DBF_EMPLEADO_OBJ=require('../modelos/empleados')
 router = express.Router();
 
@@ -46,25 +46,43 @@ router.get('/productos', function (req, res) {
 	res.render('productos')
 });
 //Obtener los valores de los input para guardarlos en el esquema o eso se supone..
-router.post('/productos',function(req,res){
-	
-	var nuevoProducto=new E_DBF_PRODUCTO_OBJ({
+router.post('/productos', function (req, res) {
+	var nuevoP = new E_DBF_PRODUCTO_OBJ({
 		CodigoProducto:req.body.Cod_Prod,
 		Descripcion:req.body.Des_Prod,
 		Existencia:req.body.Exis_Prod,
 		PrecComp_Pro:req.body.PrecComp_Pro,
 		PrecVen_Pro:req.body.PrecVen_Pro
 	})
-	nuevoProducto.save(function (error, resp) {
+	nuevoP.save(function (error, resp) {
 		if (error) {
 			res.render('500', { error: error })
-			console.log("Errorcito");
+			console.log(error);
 		} else {
 			res.render('productos', { success_msg: 'Guardado' })
-			console.log("hola joven");
+			console.log("Guardado");
 		}
 	})
-});
+})
+// router.post('/productos',function(req,res){
+	
+// 	var nuevoProducto=new E_DBF_PRODUCTO_OBJ({
+// 		CodigoProducto:req.body.Cod_Prod,
+// 		Descripcion:req.body.Des_Prod,
+// 		Existencia:req.body.Exis_Prod,
+// 		PrecComp_Pro:req.body.PrecComp_Pro,
+// 		PrecVen_Pro:req.body.PrecVen_Pro
+// 	})
+// 	nuevoProducto.save(function (error, resp) {
+// 		if (error) {
+// 			res.render('500', { error: error })
+// 			console.log("Errorcito");
+// 		} else {
+// 			res.render('productos', { success_msg: 'Guardado' })
+// 			console.log("hola joven");
+// 		}
+// 	})
+// });
 //renderiza en la ruta inventario la vista inventario
 router.get('/inventario', function (req, res) {
 	res.render('inventario')
@@ -88,11 +106,12 @@ router.post('/empleados',function(req,res){
 	    Tur_Emp: req.body.Tur_Emp,
 	    Estd_Emp: req.body.Estd_Emp
 	}
+	console.log(objeto)
 	var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
 	nuevoEmpleado.save(function(error,resp){
 		if(error){
 			res.render('500',{error:error})
-			console.log("Error");
+			console.log(error);
 		}else{
 			res.render('empleados',{success_msg:'Guardado'})
 			console.log("Guardado");
