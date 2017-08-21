@@ -61,6 +61,7 @@ router.post('/productos', function (req, res) {
 		} else {
 			res.render('productos', { success_msg: 'Guardado' })
 			console.log("Guardado");
+			console.log(nuevoP);
 		}
 	})
 })
