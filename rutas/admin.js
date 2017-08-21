@@ -44,9 +44,15 @@ router.get('/control-actividades', function (req, res) {
 router.get('/productos', function (req, res) {
 	res.render('productos')
 });
-router.post('/productos', function (req, res) {
-
-	var nuevoProducto = new EMAEVENTINV_OBJ({
+//Obtener los valores de los input para guardarlos en el esquema o eso se supone..
+router.post('/productos',function(req,res){
+	
+	var nuevoProducto=new EMAEVENTINV_OBJ({
+		CodigoProducto:req.body.Cod_Prod,
+		Descripcion:req.body.Des_Prod,
+		Existencia:req.body.Exis_Prod,
+		PrecComp_Pro:req.body.PrecComp_Pro,
+		PrecVen_Pro:req.body.PrecVen_Pro
 	})
 	nuevoProducto.save(function (error, resp) {
 		if (error) {
