@@ -30,12 +30,15 @@ router.post('/productos',function(req,res){
 		Existencia:req.body.Exis_Prod,
 		PrecComp_Pro:req.body.PrecComp_Pro,
 		PrecVen_Pro:req.body.PrecVen_Pro
-	})
+	});
+	
 	nuevoProducto.save(function(error,resp){
 		if(error){
+			console.log('sdsadda');
 			res.render('500',{error:error})
 		}else{
-			res.render('productos',{success_msg:'Guardado'})
+			res.render('/admin/productos',{success_msg:'Guardado'})
+			console.log(nuevoProducto);
 		}
 	})
 });
