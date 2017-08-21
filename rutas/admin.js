@@ -1,6 +1,7 @@
 var express = require('express'),
 	venta_model = require("../modelos/ventas");
 EMAEVENTINV_OBJ = require('../modelos/productos')
+E_DBF_EMPLEADO_OBJ=require('../modelos/empleados')
 router = express.Router();
 
 function ensureAuthenticated(req, res, next) {
@@ -76,5 +77,25 @@ router.get('/cliente', function (req, res) {
 router.get('/registro_empleado', function (req, res) {
 	res.render('registro_empleado')
 });
+
+router.post('/empleados',function(req,res){
+	var objeto = {
+		Ced_Emp: req.body.Ced_Emp,
+	    Nomb_Emp: req.body.Nomb_Emp,
+	    Telf_Emp: req.body.Telf_Emp,
+	    Tur_Emp: req.body.Tur_Emp,
+	    Estd_Emp: req.body.Estd_Emp
+	}
+	var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
+	nuevoEmpleado.save(function(error,resp){
+		if(error){
+			res.render('500',{error:error})
+			console.log("Error");
+		}else{
+			res.render('empleados',{success_msg:'Guardado'})
+			console.log("Guardado");
+		}
+	})
+})
 
 module.exports = router;

@@ -304,19 +304,24 @@ function dataTable(j,array){
 
 //funcion unicamente llamada en el modulo de productos en la parte de inventario
 //para editar datos del inv se activa con el event click
-Funciones["editProduct"] = function () {
+Funciones["editEmpleado"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
 	var formhtml = '<form style="text-align: left;">'+
-	'<label>Codigo de Producto</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'" disabled="true"><br>'+
-	'<label style="text-align: left;">Nombre de Producto: </label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[0].innerHTML+'" ><br>'+
-	'<label>Stock</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[2].innerHTML+'"><br>'+
-	'<label>Precio</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[3].innerHTML+'"><br>'+
+	'<label style="text-align: left;">Cédula: </label>'+
+	'<input class="mdl-textfield__input" type="number" value="'+datos[0].innerHTML+'" disabled="true"><br>'+
+	'<label>Nombres</label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'"><br>'+
+	'<label>Telefono</label>'+
+	'<input class="mdl-textfield__input" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
+		'<option>Matutino</option>'+
+		'<option>Vespertino</option>'+
+		'<option>Nocturno</option>'+
+	'</select><br>'+
+	'<label>Direccion</label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[4].innerHTML+'"><br>'+
 	'</form>'
 	swal({
 		  	title: 'Datos Producto',
@@ -327,19 +332,31 @@ Funciones["editProduct"] = function () {
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
+		  		var divs = document.getElementsByTagName("div")
+		  		var form;
+		  		for (var i = 0; i < divs.length; i++) {
+		  			if (divs[i].className=="sweet-content") {
+		  				form=divs[i].firstChild
+		  				break;
+		  			};
+		  		};
+		  		var bool = ValidarDatosFormulario(form)
+		  		if (form && !bool) {
+		  			return false;
+		  		};
 		    	swal({
-			  	title: '¿Seguro que desea modificar los datos del producto?',
+			  	title: '¿Seguro que desea modificar los datos del Empleado?',
 			  	type: 'warning',
 			  	showCancelButton: true,
 			  	confirmButtonText: 'Si',
 			  	cancelButtonText:'No'
 
-			},
-			function(isConfirm) {
-			  	if (isConfirm) {
-			    	location.reload(); 
-			  	}
-			}); 
+				},
+				function(isConfirm) {
+				  	if (isConfirm) {
+						location.reload(); 
+				  	}
+				}); 
 		  	}
 		});
 }
@@ -426,11 +443,12 @@ Funciones["editEmpleado"] = function () {
 		});
 }
 
-Funciones["saveEmpleado"] = function(e){
+Funciones["saveEmpleado"] = function (e){
 	e.preventDefault();
-	var bool = ValidarDatosFormulario(this.form);
+	var form = this.form
+	if (!form) {return false}
+	var bool = ValidarDatosFormulario(form);
 	if (bool){ 
-
 	swal({
 		  	title: 'Formulario Válido',
 		  	type: 'info',
@@ -441,8 +459,7 @@ Funciones["saveEmpleado"] = function(e){
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
-		  		return true;
-		  		//location.reload();
+		  		form.submit();
 		  	}
 		  	else{
 		  		return false;
