@@ -48,30 +48,20 @@ router.get('/productos', function (req, res) {
 //Obtener los valores de los input para guardarlos en el esquema o eso se supone..
 router.post('/productos',function(req,res){
 	
-	var nuevoProducto=new EMAEVENTINV_OBJ({
+	var nuevoProducto=new E_DBF_PRODUCTO_OBJ({
 		CodigoProducto:req.body.Cod_Prod,
 		Descripcion:req.body.Des_Prod,
 		Existencia:req.body.Exis_Prod,
 		PrecComp_Pro:req.body.PrecComp_Pro,
 		PrecVen_Pro:req.body.PrecVen_Pro
-<<<<<<< HEAD
-	});
-	
-	nuevoProducto.save(function(error,resp){
-		if(error){
-			console.log('sdsadda');
-			res.render('500',{error:error})
-		}else{
-			res.render('/admin/productos',{success_msg:'Guardado'})
-			console.log(nuevoProducto);
-=======
 	})
 	nuevoProducto.save(function (error, resp) {
 		if (error) {
 			res.render('500', { error: error })
+			console.log("Errorcito");
 		} else {
 			res.render('productos', { success_msg: 'Guardado' })
->>>>>>> 2e61bc09905d9a83fe8326740786978dfd26997b
+			console.log("hola joven");
 		}
 	})
 });
