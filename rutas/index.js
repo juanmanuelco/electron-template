@@ -1,5 +1,5 @@
 var express = require('express'), 
-    router = express.Router();
+	router = express.Router();
 
 function ensureAuthenticated(req, res, next) { 
 	if (req.isAuthenticated()) { 
@@ -16,5 +16,6 @@ router.get('/',ensureAuthenticated, function(req,res){
     //Para que esto funcione debemos poner {{saludo}} en el handlebars correspondiente
     res.render('index',{adios:'Ya me voy'})
 })
+
 
 module.exports = router;

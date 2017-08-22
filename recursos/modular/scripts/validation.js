@@ -1,9 +1,34 @@
+/*
+	Este script se ha construido para poder realizar funciones "globales" (en lo posible)
+	en las cuales hallaremos validaciones echas para elementos html
+	la forma de llamar estas funciones es simple, en el objeto html deberemos poner las siguientes
+	etiquetas validation="nombre de funcion",event="nombre del evento con el cual se activara la funcion" 
+	y otros atributos dependiendo las funciones ejemplo:
+	input validacion cedula y ruc
+	<input type="number" validation="cedruc" event="keyup">
+	input validacion cedula 
+	<input type="number" validation="cedula" event="keyup">
+	input validacion ruc
+	<input type="number" validation="ruc" event="keyup">
+	busqueda de tablas con datos estaticos
+	en este caso tabla ID es el id de la tabla donde se realizara la busqueda y datos son las columnas en las cuales 
+	interacuta la busqueda
+	<input type="text" class="search" validation="buscarTabla" event="keyup" TablaID="tablaProducts" datos="0,1,2">
+	cada funcion tendrá un comentario para saber con que elementos han sido pensadas
+
+	PD: a los que metan funciones nuevas aqui, sea para uso de modulo o que estén pensadas para todos, por favor,
+	comentar las funciones así como lo he echo yo, para saber con que se puede usar y con que eventos
+
+	PD2: las funciones echas para verificacion de cedula y ruc están con funciones de identificacion.js
+	por lo cual se debe llamar a ese script antes de este si se van a usar estas validaciones
+*/
+
 Funciones = {};
 
 Timers={};
 
 spansTextBefore={}
-
+//funcion cedruc pensada para usarla con inputs y con los eventos keyup, keypress
 Funciones["cedruc"] = function (e) {
 	var ekey="";
 	if (e && e.key && (e.type=="change" || e.key == "e") ) { ekey=(e.key||"") };
@@ -22,6 +47,8 @@ Funciones["cedruc"] = function (e) {
 	}
 }
 
+
+//funcion cedula pensada para usarla con inputs y con los eventos keyup, keypress
 Funciones["cedula"] = function (e) {
 	var ekey="";
 	if (e && e.key && (e.type=="change" || e.key == "e") ) { ekey=(e.key||"") };
@@ -39,6 +66,8 @@ Funciones["cedula"] = function (e) {
 	}
 }
 
+
+//funcion cedula pensada para usarla con inputs y con los eventos keyup, keypress
 Funciones["ruc"] = function (e) {
 	var ekey="";
 	if (e && e.key && (e.type=="change" || e.key == "e") ) { ekey=(e.key||"") };
@@ -56,8 +85,7 @@ Funciones["ruc"] = function (e) {
 	}
 }
 
-
-
+//funcion cedula pensada para usarla con inputs y con los eventos keyup, keypress
 Funciones["email"] = function(e){	
 	var ekey="";
 	if (e && e.key && e.type=="change") { ekey=(e.key||"") };
@@ -73,14 +101,38 @@ Funciones["email"] = function(e){
 	};
 }
 
+//funcion inicializacion pensada para poder ser llamada en el caso de que se genere nuevos elementos html 
+//desde javascript
 Funciones["init"] = function (argument) {
-	var elements = document.querySelectorAll( 'body *' );
+	// se a cambiado la forma de obtener los elementos del html
+	// en este caso se recorre por tipo de elemento ya que lo anterior no identificaba los buttons que estaban
+	// dentro de tablas como en el inentario
+	// se define la variable elements donde se guardaran todos los elementos
+	var elements=[]
+	// se define los elementos a buscar por medio del tagname
+	var inputs = document.getElementsByTagName("input");
+	var button = document.getElementsByTagName("button");
+	var divs = document.getElementsByTagName("div");
+	// con los for se recorren y se insertan en el arrat "elements"
+	for (var i = 0; i < inputs.length; i++) {elements.push(inputs[i])};
+	for (var i = 0; i < button.length; i++) {elements.push(button[i])};
+	for (var i = 0; i < divs.length; i++) {elements.push(divs[i])};
+	// con este for recorremos todos los elementos guardados en busca de la validacion y evento
 	for (var i = 0; i < elements.length; i++) {
 	var atributo = elements[i].getAttribute("validation") || false;
 		if ( atributo && Funciones[atributo] ){
 			var evento = elements[i].getAttribute("event") || false;
+			//modificacion del codigo para poder agregar más de 1 evento a las funciones
 			if (evento) {
-				elements[i].addEventListener(evento,Funciones[atributo]);
+				var arrayEvent = evento.split(",")
+				if (arrayEvent.length > 1) {
+					for (var i = 0; i < arrayEvent.length; i++) {
+						elements[i].addEventListener(arrayEvent[i],Funciones[atributo]);
+					};
+				}
+				else{
+					elements[i].addEventListener(evento,Funciones[atributo]);
+				}
 			}
 			elements[i].addEventListener("change",Funciones[atributo]);
 			/*elements[i].addEventListener("paste", function (e) {
@@ -88,10 +140,20 @@ Funciones["init"] = function (argument) {
 				return false;
 			});*/
 		}
+		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
+		//funciones mientras se usa otra como por ejemplo cedula
+		var solonum = elements[i].getAttribute("solonum") || false;
+		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
+		var solodecimal = elements[i].getAttribute("solodecimal") || false;
+		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumDecimal"])};
+		var EnterNext = elements[i].getAttribute("EnterNext") || false;
+		if (EnterNext) {elements[i].addEventListener("keyup",Funciones["EnterNext"])};
 	}
 }
 
-
+//funcion ocultar mostrar pensada para usarla con cualquier elemento usando el metodo click 
+//la funcion oculta elementos con el atributo ocultarID="id1,id2,...,idn" para ocultar secciones enteras
+// y la funcion mostrarID="id1,id2,id3,...,idn" hace lo mismo para mostrar secciones
 Funciones["ocultarmostrar"] = function (e) {
 	e.preventDefault();
 	var mostrarID = this.getAttribute("mostrarID")||false;
@@ -121,7 +183,8 @@ Funciones["ocultarmostrar"] = function (e) {
 	};
 }
 
-
+//funcion pensada como funcion para el modulo de clientes el cual muestra un formulario en un modal
+//para editar los datos de un cliente
 Funciones["editClient"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
@@ -174,6 +237,8 @@ Funciones["editClient"] = function () {
 		});
 }
 
+//funcion pensada como funcion para el modulo de clientes el cual muestra un formulario en un modal
+//para borrar los datos de un cliente
 Funciones["deleteClient"] = function () {
 
 	var divpadre = this.parentNode
@@ -195,14 +260,21 @@ Funciones["deleteClient"] = function () {
 	}); 
 }
 
-//0,1,5
+
+/*funcion pensada para ser usada con un input y unicamente con la funcion keyup para poder hacer
+busqueda dinamica en una tabla estatica sin conexion a base de datos, que se busca en el atributo 
+TablaID="id" o por defecto buscara una tablacon la id "table", con el atributo datos="0,1,2,...,n"
+definimos las columnas en el que la busqueda tendrá efecto por defecto busca en las columnas 0,1,5
+por que fue pensada para el modulo de cliente y despues se hizo pensando en los demás
+*/
 Funciones["buscarTabla"] = function (e) {
 	var id = this.getAttribute("TablaID") || "table"
+	var tabla = document.getElementById(id);
+	if(!tabla){console.log("no se encontró la tabla referida"); return false};
 	var array = [0,1,5]
 	if (this.getAttribute("datos")) {
 		array = this.getAttribute("datos").split(",")
 	};
-	var tabla = document.getElementById(id);
     var busqueda = this.value;
     busqueda = busqueda.toLowerCase()
     var cellsOfRow="";
@@ -237,6 +309,7 @@ Funciones["buscarTabla"] = function (e) {
         }
     }
 }
+//funcion que forma parte de la funcion anterior para buscar los datos segun su id de columna
 function dataTable(j,array){
 	for (var i = 0; i < array.length; i++) {
 		if (j==array[i]) {return true;};
@@ -244,7 +317,8 @@ function dataTable(j,array){
 	return false;
 }
 
-
+//funcion unicamente llamada en el modulo de productos en la parte de inventario
+//para editar datos del inv se activa con el event click
 Funciones["editProduct"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
@@ -285,6 +359,8 @@ Funciones["editProduct"] = function () {
 		});
 }
 
+//funcion unicamente llamada en el modulo de productos en la parte de inventario
+//para borrar datos del inv se activa con el event click
 Funciones["deleteProduct"] = function () {
 
 	var divpadre = this.parentNode
@@ -306,7 +382,8 @@ Funciones["deleteProduct"] = function () {
 	}); 
 }
 
-
+//funcion unicamente llamada en el modulo de empleado
+//para editar datos del empleado se activa con el event click
 Funciones["editEmpleado"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
@@ -318,13 +395,17 @@ Funciones["editEmpleado"] = function () {
 	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'"><br>'+
 	'<label>Telefono</label>'+
 	'<input class="mdl-textfield__input" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<label>Turno</label>'+
 	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
 		'<option>Matutino</option>'+
 		'<option>Vespertino</option>'+
 		'<option>Nocturno</option>'+
 	'</select><br>'+
-	'<label>Direccion</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[4].innerHTML+'"><br>'+
+	'<label>Estado</label>'+
+	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
+		'<option>Disponible</option>'+
+		'<option>No Disponible</option>'+
+	'</select><br>'+
 	'</form>'
 	swal({
 		  	title: 'Datos Producto',
@@ -335,6 +416,18 @@ Funciones["editEmpleado"] = function () {
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
+		  		var divs = document.getElementsByTagName("div")
+		  		var form;
+		  		for (var i = 0; i < divs.length; i++) {
+		  			if (divs[i].className=="sweet-content") {
+		  				form=divs[i].firstChild
+		  				break;
+		  			};
+		  		};
+		  		var bool = ValidarDatosFormulario(form)
+		  		if (form && !bool) {
+		  			return false;
+		  		};
 		    	swal({
 			  	title: '¿Seguro que desea modificar los datos del Empleado?',
 			  	type: 'warning',
@@ -342,16 +435,43 @@ Funciones["editEmpleado"] = function () {
 			  	confirmButtonText: 'Si',
 			  	cancelButtonText:'No'
 
-			},
-			function(isConfirm) {
-			  	if (isConfirm) {
-			    	location.reload(); 
-			  	}
-			}); 
+				},
+				function(isConfirm) {
+				  	if (isConfirm) {
+						location.reload(); 
+				  	}
+				}); 
 		  	}
 		});
 }
 
+Funciones["saveEmpleado"] = function (e){
+	e.preventDefault();
+	var form = this.form
+	if (!form) {return false}
+	var bool = ValidarDatosFormulario(form);
+	if (bool){ 
+	swal({
+		  	title: 'Formulario Válido',
+		  	type: 'info',
+		  	text:"Se guardarán los datos correctamente",
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Ok',
+		  	closeOnConfirm: true
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		  		form.submit();
+		  	}
+		  	else{
+		  		return false;
+		  	}
+		});
+	}
+}
+
+//funcion unicamente llamada en el modulo de empleado
+//para editar datos del empleado se usa unicamente con el event click
 Funciones["deleteEmpleado"] = function () {
 
 	var divpadre = this.parentNode
@@ -372,6 +492,14 @@ Funciones["deleteEmpleado"] = function () {
 	  	}
 	}); 
 }
+
+/*
+	PD: las funciones de edit,delete fueron echas para crear formularios en modales de esos modulos
+	por lo cual no es recomendable intentar usarlas en cosas que no sean tablas
+*/
+
+//funcion echa por paz para permitir decimales en inputs unicamente con coma (,) y 2 decimales maximo 
+//esta se usa unicamente con el evento keypress aunqueda algo que validar no recuerdo bien que era
 
 Funciones["NumDecimal"] = function(e){
 	var key = window.Event ? e.which : e.keyCode
@@ -401,6 +529,8 @@ Funciones["NumDecimal"] = function(e){
     }
 }
 
+//esta funcion al parecer hace lo mismo que la anterior permitiendo unicamente numeros enteros
+//tambien pensada para usarse con event="keypress"
 Funciones["NumeroEntero"] = function(e){
 	var key = window.Event ? e.which : e.keyCode
     if((key >= 48 && key <= 57)){
@@ -429,4 +559,72 @@ Funciones["NumeroEntero"] = function(e){
     }
 }
 
+//funcion para abrir un modal en la asignacion de empleados
+Funciones["AsignacionTarea"] = function (e) {
+	var formhtml = '<label>Contador de Servicio</label> <input class="mdl-textfield__input" type="number" readonly><br>'+
+	'<label>Cédula del Empleado</label> <input  class="mdl-textfield__input" type="number" ><br>'+
+	'<label>Fecha de asignación del servicio</label> <input  class="mdl-textfield__input" type="date" step="1" min="2017-08-01" max="2030-12-31"><br>'+
+	'<label>Hora de asignación del servicio</label> <input  class="mdl-textfield__input" type="time"><br>'+
+	'<label>Hora de Finalización del servicio</label> <input   class="mdl-textfield__input"type="time"><br>'+
+	'<label>RUC/Cédula Cliente</label> <input   class="mdl-textfield__input" type="number" ><br>'+
+	'<label>Descripción del servicio </label><br><textarea  cols="60" rows="10"></textarea>';
+	swal({
+		  	title: 'Tarea Empleado',
+		 	html: formhtml,
+		  	showCancelButton: true,
+		  	confirmButtonText: 'Asignar',
+		  	cancelButtonText: 'Atrás',
+		  	closeOnConfirm: false
+		},
+		function(isConfirm) {
+		  	if (isConfirm) {
+		    	swal({
+			  	title: '¿Seguro que desea asignar una tarea al Empleado?',
+			  	type: 'warning',
+			  	showCancelButton: true,
+			  	confirmButtonText: 'Si',
+			  	cancelButtonText:'No'
+
+			},
+			function(isConfirm) {
+			  	if (isConfirm) {
+			    	location.reload(); 
+			  	}
+			}); 
+		  	}
+		});
+}
+
+//función para liberar tarea
+Funciones["LibrarTarea"] = function(){
+	swal({
+		title: 'Desocupar Empleado',
+		text: "¿Estás Seguro de hacer esto?",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Estoy de acuerdo'
+	},
+	function(isConfirm) {
+		if (isConfirm) {
+		  location.reload(); 
+		}
+  	});
+}
+//Funcion para pasar al siguiente elemento dando enter
+Funciones["EnterNext"] = function (e) {
+	(e.keyCode)?k=e.keyCode:k=e.which;
+	if(k==13)
+	{	
+		var idnext = this.getAttribute("idNext")||false;
+		if (idnext) {
+			var element = document.getElementById(idnext) || false;
+			if (element) {element.focus()};
+		};
+		e.preventDefault();
+	}
+}
+
+//inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();

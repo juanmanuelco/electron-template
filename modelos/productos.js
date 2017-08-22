@@ -3,17 +3,21 @@ var mongoose = require('mongoose');
 
 //Se crea el esquema necesario_______________________________________________________________________________________________________________
 var E_DBF_PRODUCTO_OBJ = mongoose.Schema({
-    Cod_Prod: Number,
-    Des_Prod: String,
-    Exis_Prod:Number,
-    PrecComp_Pro: Number,
-    PrecVen_Pro: Number
+    CodigoProducto:{type: Number, required: true, unique: true},
+    Descripcion:{type:String},
+    Existencia:{type:Number},
+    PrecComp_Pro:{type:Number},
+    PrecVen_Pro: {type:Number}
 });
 
 //Exporta el esquema para poder ser usado en cada ruta que sea  necesario____________________________________________________________________
 var E_DBF_PRODUCTO=module.exports=mongoose.model('E_DBF_PRODUCTO',E_DBF_PRODUCTO_OBJ);
 
 //Guardar productos
+
+//Esto no se hace ._. 
+//Gracias por tu grosera.. ayuda :v
+/*
 module.exports.createProductos = function(req,res){
     var parametros= req.body
     //json de producto
@@ -30,3 +34,4 @@ module.exports.createProductos = function(req,res){
 	    
 	//});
 }
+*/
