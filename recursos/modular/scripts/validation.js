@@ -132,7 +132,7 @@ Funciones["init"] = function (argument) {
 		var solonum = elements[i].getAttribute("solonum") || false;
 		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
 		var solodecimal = elements[i].getAttribute("solodecimal") || false;
-		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
+		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumDecimal"])};
 	}
 }
 
