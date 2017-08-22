@@ -5,16 +5,16 @@
 		</p>
 		<p class="text-center text-condensedLight">CAR DE LUJO</p>
 		<p class="text-center text-condensedLight">Inicie sesion con su cuenta</p>
-		<form>
+		<form method="post" action="/users/login">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="user">
-			    <input class="mdl-textfield__input" type="text" id="userName">
+			    <input class="mdl-textfield__input" type="text" id="userName" name="username">
 			    <label for="userName" class="mdl-textfield__label" id="NombreUsuario">Nombre de usuario</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="ctr">
-			    <input class="mdl-textfield__input" type="password" id="pass">
+			    <input class="mdl-textfield__input" type="password" id="pass" name="password">
 			    <label for="pass" class="mdl-textfield__label" id="Contr">Contraseña</label>
 			</div>
-			<form href="inicio.html"> <button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Iniciar SESION</button></form> 
+			<button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Iniciar SESION</button> 
 		</form>
 	</div>
 </div>

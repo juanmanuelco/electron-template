@@ -28,9 +28,11 @@
 							<td>7</td>
 							<td>$77</td>
 							<td>
+								{{#if user.verificar}} <!--agrgarle a los demas cuando ya esten terminados -->>
 								<div style="display:block;" id="div1">
 									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
 								</div>
+								{{/if}}
 							</td>
 						</tr>
 						<tr>

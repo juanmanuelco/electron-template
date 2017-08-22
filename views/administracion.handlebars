@@ -1,0 +1,102 @@
+<section class="full-width pageContent">
+		
+		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+						<div class="full-width panel mdl-shadow--2dp">
+							<div class="full-width panel-tittle bg-primary text-center tittles">
+								Nuevo Administrador
+							</div>
+							<div class="full-width panel-content">
+								<form method="post" action="/users/administracion">
+									<div class="mdl-grid">
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+											<h4 class="text-condensedLight">Datos de Administrador</4>
+
+
+												<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchPayment">
+											<i class="zmdi zmdi-search"></i>
+										</label>
+										<div class="mdl-textfield__expandable-holder">
+											<input class="mdl-textfield__input" type="text" id="searchPayment" validation="buscarTabla" event="keyup" TablaID="tablaAdmin" datos="0,1">
+											<label class="mdl-textfield__label"></label>
+										</div>
+									</div>
+
+
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tablaAdmin">
+					<thead>
+						<tr>
+							<th class="mdl-data-table__cell--non-numeric">Nombre</th>
+							<th>Cédula</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Ronald Cedeño</td>
+							<td>13127188883</td>
+							<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+
+
+
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+											<h4 class="text-condensedLight">Detalles de la Cuenta</h4>
+
+											 
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<label class="text-condensedLight" style="font-size:20px;">Nombre de Usuario</label>
+										<input type="text"  class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" name="username">
+										<label class="mdl-textfield__label" for="PassAdmin"></label>
+										<span class="mdl-textfield__error">Usuario No válido</span>
+						    		</div>
+						    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<label class="text-condensedLight" style="font-size:20px;">Contraseña</label>
+										<input class="mdl-textfield__input" type="password" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" name="password">
+										<label class="mdl-textfield__label" for="PassAdmin"></label>
+										<span class="mdl-textfield__error">Contraseña invalida</span>
+						    		</div>
+
+											
+
+
+									<h5 class="text-condensedLight" >Tipo de Usuario</h5>
+
+
+											<div class="mdl-textfield mdl-js-textfield">
+												<select class="mdl-textfield__input" name="typoUser">
+													<option value="" disabled="" selected="">Seleccione tipo </option>
+													<option value="Administrador Principal" name="typoUser" id="admin">Administrador Principal</option>
+													<option value="Usuario Normal" name="typoUser">Usuario Normal</option>
+												</select>
+											</div>
+
+
+									<div>
+	                                               <button type="submit" id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Guardar</button>
+	                                                 <button id="btn-updClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Modificar</button>
+	                                                   <button id="btn-seaClient"  class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Buscar</button>
+	                                                     <button id="btn-delClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">Eliminar</button>
+                                               </div>							
+										</div>
+									</div>
+									<!-- Botones del Formulario-->
+									 </div>
+	                                               
+                                               </div>
+										
+										</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>

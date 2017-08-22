@@ -6,9 +6,22 @@ var bcrypt = require('bcryptjs');
 
 //Se define un esquema de como iran los datos guardados_______________________________________________________________________________________
 var E_DBF_USUARIO_OBJ  = mongoose.Schema({
+	username: {
+		type: String,
+		index:true
+	},
+	password: {
+		type: String
+	},
+	typoUser: {
+		type: String
+	},
+	verificar:{
+		type: String
+	}
   /**
    * Defina en estas líneas los datos que se necesitan salvar de el usuario
-   * es importante conservar los atributo username:{type:String}, password:{type:String}
+   * *es importante conservar los atributo username:{type:String}, password:{type:String}
    * Use formato JSON
    */
 });

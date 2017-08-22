@@ -26,7 +26,7 @@
 <body>
     
     <div id="contenido">
-        
+        {{#if user}}
         <section class="full-width container-notifications">
             <div class="full-width container-notifications-bg btn-Notification">
 
@@ -118,13 +118,16 @@
                 </a>
             </section>
         </section>
+        {{/if}}
         <!-- navBar -->
+        {{#if user}}
         <div class="full-width navBar">
             <div class="full-width navBar-options">
                 <i class="zmdi zmdi-more-vert btn-menu" id="btn-menu"></i>
                 <div class="mdl-tooltip" for="btn-menu">Menu</div>
                 <nav class="navBar-options-list">
                     <ul class="list-unstyle">
+                        
                         <li class="btn-Notification" id="notifications">
                             <i class="zmdi zmdi-notifications"></i>
                             <div class="mdl-tooltip" for="notifications">Notificaciones</div>
@@ -133,16 +136,19 @@
                             <i class="zmdi zmdi-power"></i>
                             <div class="mdl-tooltip" for="btn-exit">Cerrar Sesion</div>
                         </li>
-                        <li class="text-condensedLight noLink"><small>{{user.nombre}}</small></li>
+                        <li class="text-condensedLight noLink"><small>{{user.username}}</small></li>
                         <li class="noLink">
                             <figure style="padding-top:12px">
                                 <img src="../general/imagenes/avatar-male.png" alt="Avatar" class="img-responsive">
                             </figure>
                         </li>
+                        
                     </ul>
                 </nav>
             </div>
         </div>
+        {{/if}}
+        {{#if user}}
         <section class="full-width navLateral" style="overflow: auto;"> 
             <div class="full-width navLateral-body">
                 <div class="full-width navLateral-body-logo text-center tittles">
@@ -153,8 +159,8 @@
                     </div>
                     <figcaption class="navLateral-body-cr hide-on-tablet">
                         <span>
-						{{user.nombre}}<br>
-						<small>Admin</small>
+						{{user.username}}<br>
+						<small>{{user.verificar}}</small>
 					</span>
                     </figcaption>
                 </figure>
@@ -208,7 +214,7 @@
                             </a>
                             <ul class="full-width menu-principal sub-menu-options">
                                 <li class="full-width">
-                                    <a href="administracion.html" class="full-width">
+                                    <a href="/admin/administracion" class="full-width">
                                         <div class="navLateral-body-cl">
                                             <i class="zmdi zmdi-account"></i>
                                         </div>
@@ -324,17 +330,30 @@
                 </nav>
             </div>
         </section>
+        {{/if}}
         <!-- empieza contenido de resumen-->
-        {{{body}}}
-        
+<!--
+          {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}-->
+          
+          {{{body}}}        
     </div>
     
-
+{{#if user}}
     <footer class="navbar-fixed-bottom">
         <!--Puede ser usado para mostrar la función de cada elemento cuando se pase el mouse arriba -->
         <p id="infoElemento" class="infoElemento"></p>        
     </footer>
-
+{{/if}}
     <!--Scripts principales (estos afectan a todo el sistema)-->
     <script src="../general/scripts/jquery.js" type="text/javascript"></script>
     <script src="../general/scripts/bootstrap.js" type="text/javascript"></script>

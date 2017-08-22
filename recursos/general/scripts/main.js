@@ -38,7 +38,7 @@ $(document).ready(function(){
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
-		    	window.location='index.html'; 
+		    	window.location='/users/logout'; 
 		  	}
 		});
     });

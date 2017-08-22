@@ -8,24 +8,27 @@ function ensureAuthenticated(req, res, next) {
 		res.redirect('/users/login');	
 } 
 
-router.get('/ventas', function(req, res){
+/*router.get('/ventas', ensureAuthenticated, function(req, res){
 	res.render('ventas');
-});
+});*/
 
-router.get('/control-actividades',function(req,res){
+router.get('/control-actividades',ensureAuthenticated,function(req,res){
 	res.render('Control_Actividades')
 });
 
-router.get('/productos',function(req,res){
+router.get('/productos',ensureAuthenticated, function(req,res){
 	res.render('productos')
 });
 
-router.get('/inventario',function(req,res){
+router.get('/inventario',ensureAuthenticated, function(req,res){
 	res.render('inventario')
 });
 
-router.get('/cliente',function(req,res){
+router.get('/cliente',ensureAuthenticated, function(req,res){
 	res.render('cliente')
 });
+router.get('/administracion',ensureAuthenticated,function(req,res){
+	res.render('administracion')
+})
 
 module.exports = router;
