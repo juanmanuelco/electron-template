@@ -11,13 +11,6 @@ function ensureAuthenticated(req, res, next) {
 		res.redirect('/users/login');
 }
 
-<<<<<<< HEAD
-/*router.get('/ventas', ensureAuthenticated, function(req, res){
-	res.render('ventas');
-});*/
-
-router.get('/control-actividades',ensureAuthenticated,function(req,res){
-=======
 router.get('/ventas', function (req, res) {
 	//res.render('ventas');
 	res.render('ventas',{incrementar:"00001"})	
@@ -45,22 +38,10 @@ router.post('/ventas', function (req, res) {
 
 
 router.get('/control-actividades', function (req, res) {
->>>>>>> a3dcfaf17888695692be74bbbbb9851393149c1a
 	res.render('Control_Actividades')
 });
 //===================Productos===============================================//
 
-<<<<<<< HEAD
-router.get('/productos',ensureAuthenticated, function(req,res){
-	res.render('productos')
-});
-
-router.get('/inventario',ensureAuthenticated, function(req,res){
-	res.render('inventario')
-});
-
-router.get('/cliente',ensureAuthenticated, function(req,res){
-=======
 //renderiza en la ruta /productos la vista productos 
 router.get('/productos', function (req, res) {
 	res.render('productos')
@@ -112,7 +93,6 @@ router.get('/inventario', function (req, res) {
 //===================Productos fin===============================================//
 
 router.get('/cliente', function (req, res) {
->>>>>>> a3dcfaf17888695692be74bbbbb9851393149c1a
 	res.render('cliente')
 });
 router.get('/administracion',ensureAuthenticated,function(req,res){
