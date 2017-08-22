@@ -20,12 +20,8 @@ var archivos=null;
 
 ////=======================descomentar la linea de abajo para conectar a la base de datos ======================//
 mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
-<<<<<<< HEAD
 //mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 // //dany:1234@ds027618.mlab.com:27618/dboprueba'
-=======
-//mongoose.connect('mongodb://localhost:27017/cardelujo',{ server: { reconnectTries: Number.MAX_VALUE } });
->>>>>>> a3dcfaf17888695692be74bbbbb9851393149c1a
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
 //Si se incrementa una nueva ruta deberá ser referenciada en esta parte
 var routes = require('./rutas/index'),
