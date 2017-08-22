@@ -129,8 +129,12 @@ Funciones["init"] = function (argument) {
 		}
 		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
 		//funciones mientras se usa otra como por ejemplo cedula
+		// pueden usar como atributo en una etiqueta input el "solonum" y ponerle igual true para usar esa función que permite
+		//ingresar por teclado solo numeros 
 		var solonum = elements[i].getAttribute("solonum") || false;
 		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
+		// pueden usar como atributo en una etiqueta input el "solodecima" y ponerle igual true para usar esa función que permite
+		//ingresar por teclado solo numeros y coma
 		var solodecimal = elements[i].getAttribute("solodecimal") || false;
 		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumDecimal"])};
 	}
