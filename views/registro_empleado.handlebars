@@ -1,4 +1,4 @@
-<section class="full-width pageContent">
+<section class="full-width pageContent" >
 	<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 		<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
 			<div class="mdl-grid">
@@ -12,26 +12,33 @@
 								
 								<div class="mdl-grid">
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+										<br>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" style="font-size:20px;">Cédula</label>
-											<input class="mdl-textfield__input" type="text" pattern="-?[0-9- ]*(\.[0-9]+)?" id="Ced_Emp" name="Ced_Emp" validation="cedula" event="keyup" solonum="true">
+											<input class="mdl-textfield__input" type="text" id="Ced_Emp" name="Ced_Emp" validation="cedula" event="keyup" solonum="true" EnterNext="true" idNext="Nomb_Emp">
 											<label class="mdl-textfield__label" for="Ced_Emp"></label>
 											<span class="mdl-textfield__error">Ingrese Solo Números en Cédula</span>
 							    		</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" style="font-size:20px;">Nombre</label>
-											<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="Nomb_Emp" name="Nomb_Emp">
+											<input class="mdl-textfield__input" type="text" id="Nomb_Emp" name="Nomb_Emp" EnterNext="true" idNext="Telf_Emp">
 											<label class="mdl-textfield__label" for="Nomb_Emp"></label>
 											<span class="mdl-textfield__error">Ingrese solo letras </span>
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" style="font-size:20px;">Teléfono</label>
-											<input class="mdl-textfield__input" type="text" pattern="-?[0-9+()-]*(\.[0-9]+)?" id="Telf_Emp" name="Telf_Emp" solonum="true">
+											<input class="mdl-textfield__input" type="text" id="Telf_Emp" name="Telf_Emp" solonum="true" EnterNext="true" idNext="Tur_Emp">
 											<label class="mdl-textfield__label" for="Telf_Emp"></label>
 											<span class="mdl-textfield__error">Ingrese solo números</span>
 										</div>
 									</div>
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+										<div>
+											<div style="border:solid #000000; height:102px; width:102px;">
+												<img name="foto" id="foto" src="../general/imagenes/avatar-male.png" style="height:95px; width:95px;">
+											</div>
+											<!--<input name="myFile" type="file">-->
+										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" id="Turno" style="font-size:20px;">Turno</label>
 											<select class="mdl-textfield__input" id="Tur_Emp" name="Tur_Emp">
@@ -42,14 +49,14 @@
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" id="Estado" style="font-size:20px;">Estado</label>
-											<select class="mdl-textfield__input" id="Estd_Emp" name="Estd_Emp">
+											<select class="mdl-textfield__input" id="Estd_Emp" name="Estd_Emp" >
 												<option>Disponible</option>
 												<option>No Disponible</option>
 											</select>
 										</div>
 										<div>
-                            	  	    	<button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="GuardarEmpleado" validation="saveEmpleado" event="click">Guardar</button>
-	                                       	<button id="btn-upClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="Consultar" validation="ocultarmostrar" mostrarID="divTabla" ocultarID="tabNewAdmin" event="click" title="Mostrar Cliente Registrados">Ver Empleados Registrados</button>
+                            	  	    	<input type="button" id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="GuardarEmpleado" validation="saveEmpleado" event="click" value="Guardar">
+	                                       	<input type="button" id="btn-upClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="Consultar" validation="ocultarmostrar" mostrarID="divTabla" ocultarID="tabNewAdmin" event="click" title="Mostrar Cliente Registrados" value="Ver Empleados Registrados">
                                        </div>
 									</div>
 								</div>
@@ -85,57 +92,7 @@
 								<th><center>Opcion</center></th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1309953576</td>
-								<td>Francisco Xavier Bermello López</td>
-								<td>0991067939</td>
-								<td>Matutino</td>
-								<td>Disponible</td>
-								<td id="tr1">
-									<div style="display:block;" id="div1">
-										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>1316455524</td>
-								<td>Maritza Jenifer Moreira Mera</td>
-								<td>0900000000</td>
-								<td>Vespertino</td>
-								<td>Disponible</td>
-								<td id="tr2">
-									<div style="display:block;">
-										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>1316458650</td>
-								<td>Andy Lenin Castillo de Arteaga</td>
-								<td>09999999</td>
-								<td>Nocturno</td>
-								<td>No Disponible</td>
-								<td id="tr2">
-									<div style="display:block;">
-										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-									</div>
-								</td>
-							</tr>
-
-							<tr>
-								<td>1312718800</td>
-								<td>Jose Cedeño</td>
-								<td>4567845678</td>
-								<td>Matutino</td>
-								<td>No Dispoinible</td>
-								<td id="tr2">
-									<div style="display:block;">
-										<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-									</div>
-								</td>
-							</tr>
+						<tbody id="contenidoTabla">
 						</tbody>
 					</table>
 				</div>
@@ -149,3 +106,29 @@
 <script src="../modular/scripts/indentificaciones.js" ></script>
 <script src="../modular/scripts/validacionPrecios.js" ></script>
 <script src="../modular/scripts/validation.js" ></script>
+<script type="text/javascript">
+	$.get("getEmpleados", function(data){
+	tabla=""
+	contenido = document.getElementById("contenidoTabla");
+	  for(var a in data){
+	  	var datos = data[a]
+	  	tabla+='<tr>'
+		tabla+='<td>'+datos.Ced_Emp+'</td>'
+		tabla+='<td>'+datos.Nomb_Emp+'</td>'
+		tabla+='<td>'+datos.Telf_Emp+'</td>'
+		tabla+='<td>'+datos.Tur_Emp+'</td>'
+		tabla+='<td>'+datos.Estd_Emp+'</td>'
+		tabla+='<td>'
+				tabla+='<div>'
+					tabla+='<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>'
+				tabla+='</div>'
+			tabla+='</td>'
+			tabla+='<td style="display:none;">'
+			tabla+='sadasdsadsadsadsa'
+			tabla+='</td>'
+		tabla+='</tr>'
+	  }
+	contenido.innerHTML=tabla;
+	Funciones.init();
+	});
+</script>

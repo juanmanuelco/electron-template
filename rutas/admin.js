@@ -100,6 +100,21 @@ router.get('/registro_empleado', function (req, res) {
 	res.render('registro_empleado')
 });
 
+//por ahora estoy haciendo esta parte así quizas no se deba hacer pero por ahora funciona
+//by JUNIORCEDE(Francisco Bermello)
+router.get('/getEmpleados',function (req,res) {
+	E_DBF_EMPLEADO_OBJ.find({}, function(err, users) {
+        var userMap = {};
+
+        users.forEach(function(user) {
+          userMap[user._id] = user;
+        });
+        res.send(userMap);  
+      });
+})
+
+//por ahora estoy haciendo esto para guardar los datos del empleado aun no implemento lo de la foto
+//by JUNIORCEDE(Francisco Bermello)
 router.post('/empleados',function(req,res){
 	var objeto = {
 		Ced_Emp: req.body.Ced_Emp,
@@ -108,7 +123,6 @@ router.post('/empleados',function(req,res){
 	    Tur_Emp: req.body.Tur_Emp,
 	    Estd_Emp: req.body.Estd_Emp
 	}
-	console.log(objeto)
 	var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
 	nuevoEmpleado.save(function(error,resp){
 		if(error){

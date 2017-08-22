@@ -104,7 +104,20 @@ Funciones["email"] = function(e){
 //funcion inicializacion pensada para poder ser llamada en el caso de que se genere nuevos elementos html 
 //desde javascript
 Funciones["init"] = function (argument) {
-	var elements = document.querySelectorAll( 'body *' );
+	// se a cambiado la forma de obtener los elementos del html
+	// en este caso se recorre por tipo de elemento ya que lo anterior no identificaba los buttons que estaban
+	// dentro de tablas como en el inentario
+	// se define la variable elements donde se guardaran todos los elementos
+	var elements=[]
+	// se define los elementos a buscar por medio del tagname
+	var inputs = document.getElementsByTagName("input");
+	var button = document.getElementsByTagName("button");
+	var divs = document.getElementsByTagName("div");
+	// con los for se recorren y se insertan en el arrat "elements"
+	for (var i = 0; i < inputs.length; i++) {elements.push(inputs[i])};
+	for (var i = 0; i < button.length; i++) {elements.push(button[i])};
+	for (var i = 0; i < divs.length; i++) {elements.push(divs[i])};
+	// con este for recorremos todos los elementos guardados en busca de la validacion y evento
 	for (var i = 0; i < elements.length; i++) {
 	var atributo = elements[i].getAttribute("validation") || false;
 		if ( atributo && Funciones[atributo] ){
@@ -129,14 +142,12 @@ Funciones["init"] = function (argument) {
 		}
 		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
 		//funciones mientras se usa otra como por ejemplo cedula
-		// pueden usar como atributo en una etiqueta input el "solonum" y ponerle igual true para usar esa función que permite
-		//ingresar por teclado solo numeros 
 		var solonum = elements[i].getAttribute("solonum") || false;
 		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
-		// pueden usar como atributo en una etiqueta input el "solodecima" y ponerle igual true para usar esa función que permite
-		//ingresar por teclado solo numeros y coma
 		var solodecimal = elements[i].getAttribute("solodecimal") || false;
 		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumDecimal"])};
+		var EnterNext = elements[i].getAttribute("EnterNext") || false;
+		if (EnterNext) {elements[i].addEventListener("keyup",Funciones["EnterNext"])};
 	}
 }
 
@@ -308,24 +319,19 @@ function dataTable(j,array){
 
 //funcion unicamente llamada en el modulo de productos en la parte de inventario
 //para editar datos del inv se activa con el event click
-Funciones["editEmpleado"] = function () {
+Funciones["editProduct"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
 	var formhtml = '<form style="text-align: left;">'+
-	'<label style="text-align: left;">Cédula: </label>'+
-	'<input class="mdl-textfield__input" type="number" value="'+datos[0].innerHTML+'" disabled="true"><br>'+
-	'<label>Nombres</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'"><br>'+
-	'<label>Telefono</label>'+
-	'<input class="mdl-textfield__input" type="number" value="'+datos[2].innerHTML+'"><br>'+
-	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
-		'<option>Matutino</option>'+
-		'<option>Vespertino</option>'+
-		'<option>Nocturno</option>'+
-	'</select><br>'+
-	'<label>Direccion</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[4].innerHTML+'"><br>'+
+	'<label>Codigo de Producto</label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'" disabled="true"><br>'+
+	'<label style="text-align: left;">Nombre de Producto: </label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[0].innerHTML+'" ><br>'+
+	'<label>Stock</label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[2].innerHTML+'"><br>'+
+	'<label>Precio</label>'+
+	'<input class="mdl-textfield__input" type="text" value="'+datos[3].innerHTML+'"><br>'+
 	'</form>'
 	swal({
 		  	title: 'Datos Producto',
@@ -336,31 +342,19 @@ Funciones["editEmpleado"] = function () {
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
-		  		var divs = document.getElementsByTagName("div")
-		  		var form;
-		  		for (var i = 0; i < divs.length; i++) {
-		  			if (divs[i].className=="sweet-content") {
-		  				form=divs[i].firstChild
-		  				break;
-		  			};
-		  		};
-		  		var bool = ValidarDatosFormulario(form)
-		  		if (form && !bool) {
-		  			return false;
-		  		};
 		    	swal({
-			  	title: '¿Seguro que desea modificar los datos del Empleado?',
+			  	title: '¿Seguro que desea modificar los datos del producto?',
 			  	type: 'warning',
 			  	showCancelButton: true,
 			  	confirmButtonText: 'Si',
 			  	cancelButtonText:'No'
 
-				},
-				function(isConfirm) {
-				  	if (isConfirm) {
-						location.reload(); 
-				  	}
-				}); 
+			},
+			function(isConfirm) {
+			  	if (isConfirm) {
+			    	location.reload(); 
+			  	}
+			}); 
 		  	}
 		});
 }
@@ -401,13 +395,17 @@ Funciones["editEmpleado"] = function () {
 	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'"><br>'+
 	'<label>Telefono</label>'+
 	'<input class="mdl-textfield__input" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<label>Turno</label>'+
 	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
 		'<option>Matutino</option>'+
 		'<option>Vespertino</option>'+
 		'<option>Nocturno</option>'+
 	'</select><br>'+
-	'<label>Direccion</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[4].innerHTML+'"><br>'+
+	'<label>Estado</label>'+
+	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
+		'<option>Disponible</option>'+
+		'<option>No Disponible</option>'+
+	'</select><br>'+
 	'</form>'
 	swal({
 		  	title: 'Datos Producto',
@@ -613,6 +611,19 @@ Funciones["LibrarTarea"] = function(){
 		  location.reload(); 
 		}
   	});
+}
+//Funcion para pasar al siguiente elemento dando enter
+Funciones["EnterNext"] = function (e) {
+	(e.keyCode)?k=e.keyCode:k=e.which;
+	if(k==13)
+	{	
+		var idnext = this.getAttribute("idNext")||false;
+		if (idnext) {
+			var element = document.getElementById(idnext) || false;
+			if (element) {element.focus()};
+		};
+		e.preventDefault();
+	}
 }
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
