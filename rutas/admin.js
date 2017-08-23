@@ -49,15 +49,17 @@ router.post('/productos', function (req, res) {
 	E_DBF_PRODUCTO_OBJ.findOne().where({ Cod_Prod: req.body.Cod_Prod }).exec(function (err, respu) {
 		if (respu == null) {
 			var nuevoP = new E_DBF_PRODUCTO_OBJ({
-				Cod_Prod: req.body.Cod_Prod,
+				
 				Descripcion: req.body.Des_Prod,
+				Cod_Prod: req.body.Cod_Prod,
 				Existencia: req.body.Exis_Prod,
 				PrecComp_Pro: req.body.PrecComp_Pro,
 				PrecVen_Pro: req.body.PrecVen_Pro
 			})
 			nuevoP.save(function (erro, resp) {
 				if (erro) {
-					res.render('500', { error: erro })
+					console.log(erro)
+					res.render('productos', { error: erro})
 				} else {
 					res.render('productos', { success_msg: 'Producto guardado correctamente.' })
 				}
