@@ -58,11 +58,12 @@ Funciones["cedula"] = function (e) {
 	spansTextBefore[span] = span.innerHTML;
 	span.innerHTML= "Cedula no válida";
 	if (Timers[this]) {
-	clearTimeout(Timers[this]);};
+	clearTimeout(Timers[this])
+	}
 	if (!ident.validarCedula(cedula)) {
 		Timers[this] = setTimeout(function (a){
 			a.parentNode.classList.add("is-invalid");
-		},200,this);
+		},1,this);
 	}
 }
 
@@ -120,6 +121,27 @@ Funciones["init"] = function (argument) {
 	// con este for recorremos todos los elementos guardados en busca de la validacion y evento
 	for (var i = 0; i < elements.length; i++) {
 	var atributo = elements[i].getAttribute("validation") || false;
+
+		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
+		//funciones mientras se usa otra como por ejemplo cedula
+		var solonum = elements[i].getAttribute("solonum") || false;
+		if (solonum) {
+			elements[i].addEventListener("keypress",Funciones["NumeroEntero"])
+			elements[i].addEventListener("keyup",Funciones["NumeroEntero"])
+		};
+		var solodecimal = elements[i].getAttribute("solodecimal") || false;
+		if (solodecimal) {
+			elements[i].addEventListener("keypress",Funciones["NumDecimal"])
+			elements[i].addEventListener("keyup",Funciones["NumDecimal"])
+		};
+		var soloLetras = elements[i].getAttribute("soloLetras") || false;
+		if (soloLetras) {
+			elements[i].addEventListener("keypress",Funciones["soloLetras"])
+			elements[i].addEventListener("keyup",Funciones["soloLetras"])
+		};
+		var EnterNext = elements[i].getAttribute("EnterNext") || false;
+		if (EnterNext) {elements[i].addEventListener("keyup",Funciones["EnterNext"])};
+
 		if ( atributo && Funciones[atributo] ){
 			var evento = elements[i].getAttribute("event") || false;
 			//modificacion del codigo para poder agregar más de 1 evento a las funciones
@@ -140,14 +162,6 @@ Funciones["init"] = function (argument) {
 				return false;
 			});*/
 		}
-		//Validacion de atributos solonum y solodecimal, por si se quiere usar estas 2 
-		//funciones mientras se usa otra como por ejemplo cedula
-		var solonum = elements[i].getAttribute("solonum") || false;
-		if (solonum) {elements[i].addEventListener("keypress",Funciones["NumeroEntero"])};
-		var solodecimal = elements[i].getAttribute("solodecimal") || false;
-		if (solodecimal) {elements[i].addEventListener("keypress",Funciones["NumDecimal"])};
-		var EnterNext = elements[i].getAttribute("EnterNext") || false;
-		if (EnterNext) {elements[i].addEventListener("keyup",Funciones["EnterNext"])};
 	}
 }
 
@@ -389,6 +403,20 @@ Funciones["editEmpleado"] = function () {
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
 	var formhtml = '<form id="editForm" style="text-align: left;" action="/admin/empleados" method="post">'+
+	'<div class="mdl-grid">'+
+			'<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">'+
+				'<label class="text-condensedLight" style="font-size:20px;">Foto del empleado</label>'+
+				'<div class="div_file btn">'+
+					'<p class="texto">Escoger imágen (102x102) </p>'+
+					'<input type="file" class="btn_enviar mdl-textfield__input" id="file_url" accept=".jpg,.png," name="image_producto" onchange="alertaOferta(this,this.files[0].size)" required/>'+
+				'</div>'+
+			'</div>'+
+			'<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">'+
+				'<div id="poder" style="display: none;margin:0 auto; border:solid #000000; height:108px; width:108px;">'+
+					'<img style="" src="" height="102px" width="102px" id="img_destino">'+
+				'</div>'+
+			'</div>'+
+	'</div>'+
 	'<label style="text-align: left;">Cédula: </label>'+
 	'<input class="mdl-textfield__input"  name="Ced_Emp" id="Ced_Emp" type="number" value="'+datos[0].innerHTML+'" readonly="readonly"><br>'+
 	'<label>Nombres</label>'+
@@ -445,7 +473,6 @@ Funciones["editEmpleado"] = function () {
 				function(isConfirm) {
 				  	if (isConfirm) {
 		  				document.body.appendChild(form);
-						console.log(form)
 		  				form.submit();
 				  	}
 				}); 
@@ -461,7 +488,7 @@ Funciones["saveEmpleado"] = function (e){
 	if (bool){ 
 	swal({
 		  	title: 'Formulario Válido',
-		  	type: 'info',
+		  	type: 'success',
 		  	text:"Se guardarán los datos correctamente",
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Ok',
@@ -527,9 +554,10 @@ Funciones["deleteEmpleado"] = function () {
 
 Funciones["NumDecimal"] = function(e){
 	var key = window.Event ? e.which : e.keyCode
-    if((key >= 48 && key <= 57) || key==44){
+    if((key >= 48 && key <= 57) || (key==44) || (e.type=="keyup")) {
 		var ekey=String.fromCharCode(key)|| "";
 		if(key==44){ekey=","}
+		if (e.type=="keyup") {ekey=""};
 		var numero = this.value + "" + ekey;
 		var span = this.parentNode.getElementsByTagName("span")[0]
 		if (Timers[this]) {
@@ -557,8 +585,9 @@ Funciones["NumDecimal"] = function(e){
 //tambien pensada para usarse con event="keypress"
 Funciones["NumeroEntero"] = function(e){
 	var key = window.Event ? e.which : e.keyCode
-    if((key >= 48 && key <= 57)){
+    if((key >= 48 && key <= 57) || (e.type=="keyup")){
 		var ekey=String.fromCharCode(key)|| "";
+		if (e.type=="keyup") {ekey=""};
 		
 		var numero = this.value + "" + ekey;
 		var span = this.parentNode.getElementsByTagName("span")[0]
@@ -649,6 +678,36 @@ Funciones["EnterNext"] = function (e) {
 		e.preventDefault();
 	}
 }
+
+Funciones["soloLetras"] = function (e) {
+	patron =/[A-Za-zñáéíóúÁÉÍÓÚ\s]/;
+	var validacion=true;
+	if (e.type == "keypress") {
+		tecla = (document.all) ? e.keyCode : e.which;
+		text = String.fromCharCode(tecla);
+		validacion = patron.test(text);
+		//if (!validacion) {e.preventDefault()};
+	}
+	else{
+		if (e.type=="keyup") {
+			if (this.value.length>=1) {
+				for (var i = 0; i < this.value.length; i++) {
+					validacion = patron.test(this.value[i]);
+					if (!validacion) {break;};
+				};
+			};
+		}
+	}
+	if (Timers[this]) {
+		clearTimeout(Timers[this])
+	}
+	if(!validacion){
+		Timers[this] = setTimeout(function (a){
+			a.parentNode.classList.add("is-invalid");
+		},1,this);
+	}
+}
+
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();

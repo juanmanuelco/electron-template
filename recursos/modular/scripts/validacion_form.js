@@ -25,13 +25,16 @@ function ValidarDatosFormulario(formulario,formModal) {
 			mensaje="Por favor asegurese que no haya campos vacios";
 		}
 	};	
-	var divs = formulario.getElementsByTagName("div")
-	for (var i = 0; i < divs.length; i++) {
-		if(divs[i].classList.contains("is-invalid")){
-			mensaje="Por favor asegurese que todos los datos estén correctos";
-			formNoValido=true;
-		}
+	if (!formNoValido) {
+		var divs = formulario.getElementsByTagName("div")
+		for (var i = 0; i < divs.length; i++) {
+			if(divs[i].classList.contains("is-invalid")){
+				mensaje="Por favor asegurese que todos los datos estén correctos";
+				formNoValido=true;
+			}
+		};
 	};
+	
 	if (formNoValido) {
 		if (!formModal) {
 			swal({
