@@ -155,7 +155,6 @@ function ventanaPrincipal() {
   cargando.show()
 }
 
-
 //La aplicación se inicia__________________________________________________________________________________________________
 app.on('ready', ventanaPrincipal);
 

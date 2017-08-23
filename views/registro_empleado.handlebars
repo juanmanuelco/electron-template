@@ -8,8 +8,7 @@
 							Nuevo Empleado
 						</div>
 						<div class="full-width panel-content">
-							<form action="/admin/empleados" method="post">
-								
+							<form action="/admin/empleados" method="post" enctype="multipart/form-data">
 								<div class="mdl-grid">
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 										<br>
@@ -33,11 +32,22 @@
 										</div>
 									</div>
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-										<div>
-											<div style="border:solid #000000; height:102px; width:102px;">
-												<img name="foto" id="foto" src="../general/imagenes/avatar-male.png" style="height:95px; width:95px;">
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<label class="text-condensedLight"  for="file_url" style="font-size:20px;">Foto del empleado</label>
+													<div class="div_file btn">
+														<p class="texto">Escoger imágen (102x102) </p>
+														<input type="file" class="btn_enviar mdl-textfield__input" id="file_url" accept=".jpg,.png," name="image_producto" onchange="alertaOferta(this,this.files[0].size)"
+														required/>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													<div id="poder" style="display: none;margin:0 auto">
+														<img style="" src="" height="102px" width="102px" id="img_destino">		
+													</div>
+												</div>
 											</div>
-											<!--<input name="myFile" type="file">-->
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" id="Turno" style="font-size:20px;">Turno</label>
@@ -132,3 +142,5 @@
 	Funciones.init();
 	});
 </script>
+<script src="../modular/scripts/empleados.js"></script>
+<link rel="stylesheet" href="../modular/estilos/empleados.css">
