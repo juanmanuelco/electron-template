@@ -44,22 +44,26 @@ router.get('/productos', ensureAuthenticated,function (req, res) {
 	res.render('productos')
 });
 //Obtener los valores de los input para guardarlos en el esquema o eso se supone..
-router.post('/productos',ensureAuthenticated, function (req, res) {
-	var nuevoP = new E_DBF_PRODUCTO_OBJ({
-		CodigoProducto:req.body.Cod_Prod,
-		Descripcion:req.body.Des_Prod,
-		Existencia:req.body.Exis_Prod,
-		PrecComp_Pro:req.body.PrecComp_Pro,
-		PrecVen_Pro:req.body.PrecVen_Pro
-	})
-	nuevoP.save(function (error, resp) {
-		if (error) {
-			res.render('500', { error: error })
-			console.log(error);
+router.post('/productos', function (req, res) {
+	//esta línea obtiene el Cod_Prod y valida que solo se repida una vez
+	E_DBF_PRODUCTO_OBJ.findOne().where({ Cod_Prod: req.body.Cod_Prod }).exec(function (err, respu) {
+		if (respu == null) {
+			var nuevoP = new E_DBF_PRODUCTO_OBJ({
+				Cod_Prod: req.body.Cod_Prod,
+				Descripcion: req.body.Des_Prod,
+				Existencia: req.body.Exis_Prod,
+				PrecComp_Pro: req.body.PrecComp_Pro,
+				PrecVen_Pro: req.body.PrecVen_Pro
+			})
+			nuevoP.save(function (erro, resp) {
+				if (erro) {
+					res.render('500', { error: erro })
+				} else {
+					res.render('productos', { success_msg: 'Producto guardado correctamente.' })
+				}
+			})
 		} else {
-			res.render('productos', { success_msg: 'Guardado' })
-			console.log("Guardado");
-			console.log(nuevoP);
+			res.render('productos', {error: 'Ya existe un producto con este código, por favor intente con otro "Código de Producto" consulte el inventario' })		
 		}
 	})
 })
