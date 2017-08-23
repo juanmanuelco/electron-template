@@ -69,9 +69,24 @@ router.post('/productos', function (req, res) {
 		}
 	})
 })
-router.get('/inventario', ensureAuthenticated,function (req, res) {
-	res.render('inventario')
+router.get('/inventario',ensureAuthenticated, function (req, res) {
+	E_DBF_PRODUCTO_OBJ.find({}, function(err, users) {
+		res.render('inventario',{producto:users});
+  	});
 });
+
+
+// router.get('/inventario', ensureAuthenticated,function (req, res) {
+// 	var empleadosDisponibles=new Array(), 
+// 	empleadoNoDisponibles=new Array();
+// 	E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'Disponible'}).exec(function(error,disponibles){
+// 		empleadosDisponibles=disponibles;
+// 		E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'No Disponible'}).exec(function(error,Nodisponibles){
+// 			empleadoNoDisponibles=Nodisponibles;
+// 			res.render('inventario',{disponibles:empleadosDisponibles,noDisponibles:empleadoNoDisponibles});
+// 		});
+// });
+// });
 
 //===================Productos fin===============================================//
 

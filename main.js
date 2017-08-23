@@ -19,8 +19,8 @@ port = process.env.PORT || puerto;
 var archivos=null;
 
 ////=======================descomentar la linea de abajo para conectar a la base de datos ======================//
-//mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
-mongoose.connect('mongodb://127.0.0.1:27017/dbprueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+//mongoose.connect('mongodb://127.0.0.1:27017/dbprueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 //mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 // //dany:1234@ds027618.mlab.com:27618/dboprueba'
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________

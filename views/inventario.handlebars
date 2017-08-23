@@ -9,101 +9,37 @@
 										</div>
 									</div>
 		<div class="full-width divider-menu-h"></div>
-		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tablaProduct">
-					<thead>
-						<tr>
-							<th class="mdl-data-table__cell--non-numeric">Nombre</th>
-							<th>Codigo</th>
-							<th>Stock</th>
-							<th>Precio</th>
-							<th>Opciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Llantas</td>
-							<td>2621351236</td>
-							<td>7</td>
-							<td>$77</td>
+		<div class="mdl-grid" align="center">
+			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">				
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive" id="tblPersonas">
+						<thead>
+							<tr>
+								<th>Código del Producto</th>
+								<th>Descripción</th>
+								<th>Existencia</th>
+								<th>Precio de Compra</th>
+								<th>Precio de Venta</th>
+								<th><center>Opcion</center></th>
+							</tr>
+						</thead>
+						<tbody id="contenidoTabla">
+							{{#if producto}}{{#each producto}}
+							<tr>
+							<td>{{this.Cod_Prod}}</td>
+							<td>{{this.Des_Prod}}</td>
+							<td>{{this.Existencia}}</td>
+							<td>{{this.PrecComp_Pro}}</td>
+							<td>{{this.PrecVen_Pro}}</td>
 							<td>
-								{{#if user.verificar}} <!--agrgarle a los demas cuando ya esten terminados -->>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-								{{/if}}
-							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+								<div>
+									<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
 								</div>
 							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">Nombre del producto</td>
-							<td>Nombre del producto</td>
-							<td>7</td>
-							<td>$77</td>
-							<td>
-								<div style="display:block;" id="div1">
-									<button id="editClient" title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editProduct" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit" ></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteProduct" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+							</tr>
+                            {{/each}}{{/if}}
+						</tbody>
+					</table>
+				</div>
 		</div>
 	</section>
     <script src="../modular/scripts/validation.js" ></script>
