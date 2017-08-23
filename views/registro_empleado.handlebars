@@ -32,7 +32,7 @@
 										</div>
 									</div>
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<div>
 											<div class="row">
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													<label class="text-condensedLight"  for="file_url" style="font-size:20px;">Foto del empleado</label>
@@ -103,6 +103,20 @@
 							</tr>
 						</thead>
 						<tbody id="contenidoTabla">
+							{{#if usuarios}}{{#each usuarios}}
+							<tr>
+							<td>{{this.Ced_Emp}}</td>
+							<td>{{this.Nomb_Emp}}</td>
+							<td>{{this.Telf_Emp}}</td>
+							<td>{{this.Tur_Emp}}</td>
+							<td>{{this.Estd_Emp}}</td>
+							<td>
+								<div>
+									<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+								</div>
+							</td>
+							</tr>
+                            {{/each}}{{/if}}
 						</tbody>
 					</table>
 				</div>
@@ -116,31 +130,5 @@
 <script src="../modular/scripts/indentificaciones.js" ></script>
 <script src="../modular/scripts/validacionPrecios.js" ></script>
 <script src="../modular/scripts/validation.js" ></script>
-<script type="text/javascript">
-	$.get("getEmpleados", function(data){
-	tabla=""
-	contenido = document.getElementById("contenidoTabla");
-	  for(var a in data){
-	  	var datos = data[a]
-	  	tabla+='<tr>'
-		tabla+='<td>'+datos.Ced_Emp+'</td>'
-		tabla+='<td>'+datos.Nomb_Emp+'</td>'
-		tabla+='<td>'+datos.Telf_Emp+'</td>'
-		tabla+='<td>'+datos.Tur_Emp+'</td>'
-		tabla+='<td>'+datos.Estd_Emp+'</td>'
-		tabla+='<td>'
-				tabla+='<div>'
-					tabla+='<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>'
-				tabla+='</div>'
-			tabla+='</td>'
-			tabla+='<td style="display:none;">'
-			tabla+='sadasdsadsadsadsa'
-			tabla+='</td>'
-		tabla+='</tr>'
-	  }
-	contenido.innerHTML=tabla;
-	Funciones.init();
-	});
-</script>
 <script src="../modular/scripts/empleados.js"></script>
 <link rel="stylesheet" href="../modular/estilos/empleados.css">

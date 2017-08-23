@@ -388,24 +388,26 @@ Funciones["editEmpleado"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
-	var formhtml = '<form style="text-align: left;">'+
+	var formhtml = '<form id="editForm" style="text-align: left;" action="/admin/empleados" method="post">'+
 	'<label style="text-align: left;">Cédula: </label>'+
-	'<input class="mdl-textfield__input" type="number" value="'+datos[0].innerHTML+'" disabled="true"><br>'+
+	'<input class="mdl-textfield__input"  name="Ced_Emp" id="Ced_Emp" type="number" value="'+datos[0].innerHTML+'" readonly="readonly"><br>'+
 	'<label>Nombres</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'"><br>'+
+	'<input class="mdl-textfield__input"  name="Nomb_Emp" id="Nomb_Emp" type="text" value="'+datos[1].innerHTML+'"><br>'+
 	'<label>Telefono</label>'+
-	'<input class="mdl-textfield__input" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<input class="mdl-textfield__input" name="Telf_Emp" id="Telf_Emp" type="number" value="'+datos[2].innerHTML+'"><br>'+
 	'<label>Turno</label>'+
-	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
+	'<select class="mdl-textfield__input" name="Tur_Emp" id="Tur_Emp" value="'+datos[3].innerHTML+'">'+
 		'<option>Matutino</option>'+
 		'<option>Vespertino</option>'+
 		'<option>Nocturno</option>'+
 	'</select><br>'+
 	'<label>Estado</label>'+
-	'<select class="mdl-textfield__input" value="'+datos[3].innerHTML+'">'+
+	'<select class="mdl-textfield__input" name="Estd_Emp" id="Estd_Emp"  value="'+datos[3].innerHTML+'">'+
 		'<option>Disponible</option>'+
 		'<option>No Disponible</option>'+
 	'</select><br>'+
+	'<label id="labelFormModal" style="display:none">Por favor asegurese que todos los datos del formulario son correctos </label>'+
+	'<input type="hidden" value="Actualizar" name="accion" id="accion">'+
 	'</form>'
 	swal({
 		  	title: 'Datos Producto',
@@ -420,12 +422,16 @@ Funciones["editEmpleado"] = function () {
 		  		var form;
 		  		for (var i = 0; i < divs.length; i++) {
 		  			if (divs[i].className=="sweet-content") {
-		  				form=divs[i].firstChild
-		  				break;
+		  				if (divs[i].firstChild.id=="editForm") {
+		  					form=divs[i].firstChild;
+		  					break;
+		  				};
 		  			};
 		  		};
-		  		var bool = ValidarDatosFormulario(form)
+		  		var bool;
+		  		if (form) {bool = ValidarDatosFormulario(form,true)}
 		  		if (form && !bool) {
+		  			document.getElementById("labelFormModal").style.display="block";
 		  			return false;
 		  		};
 		    	swal({
@@ -438,7 +444,9 @@ Funciones["editEmpleado"] = function () {
 				},
 				function(isConfirm) {
 				  	if (isConfirm) {
-						location.reload(); 
+		  				document.body.appendChild(form);
+						console.log(form)
+		  				form.submit();
 				  	}
 				}); 
 		  	}
@@ -477,7 +485,10 @@ Funciones["deleteEmpleado"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
-	var infoHTML = '<label>Cedula: '+datos[0].innerHTML+'</label><br><label>Nombre: '+datos[1].innerHTML+'</label>';
+	var infoHTML = '<form id="deleteForm" action="/admin/empleados" method="post"><label>Cedula: '+datos[0].innerHTML+
+	'</label><br><label>Nombre: '+datos[1].innerHTML+'</label>';
+	infoHTML+='<input type="hidden" name="Ced_Emp" id="Ced_Emp" type="number" value="'+
+	datos[0].innerHTML+'" readonly="readonly"><input type="hidden" value="Eliminar" name="accion" id="accion"></form>';
 	swal({
 	  	title: '¿Seguro que desea eliminar los datos de este Empleado?',
 	  	html: infoHTML,
@@ -488,7 +499,20 @@ Funciones["deleteEmpleado"] = function () {
 	},
 	function(isConfirm) {
 	  	if (isConfirm) {
-	    	location.reload(); 
+	  		var divs = document.getElementsByTagName("div")
+		  		var form;
+		  		for (var i = 0; i < divs.length; i++) {
+		  			if (divs[i].className=="sweet-content") {
+		  				if (divs[i].firstChild.id=="deleteForm") {
+		  					form=divs[i].firstChild;
+		  					break;
+		  				};
+		  			};
+		  		};
+		  	if (form) {
+		  		document.body.appendChild(form);
+		  		form.submit()
+		  	};
 	  	}
 	}); 
 }
