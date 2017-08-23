@@ -83,52 +83,89 @@ router.get('/administracion',ensureAuthenticated,function(req,res){
 })
 
 router.get('/registro_empleado',ensureAuthenticated, function (req, res) {
-	res.render('registro_empleado')
+	E_DBF_EMPLEADO_OBJ.find({}, function(err, users) {
+		res.render('registro_empleado',{usuarios:users});
+  	});
 });
 
-//por ahora estoy haciendo esta parte así quizas no se deba hacer pero por ahora funciona
-//by JUNIORCEDE(Francisco Bermello)
-router.get('/getEmpleados',ensureAuthenticated,function (req,res) {
-	E_DBF_EMPLEADO_OBJ.find({}, function(err, users) {
-        var userMap = {};
-
-        users.forEach(function(user) {
-          userMap[user._id] = user;
-        });
-        res.send(userMap);  
-      });
-})
 
 //por ahora estoy haciendo esto para guardar los datos del empleado aun no implemento lo de la foto
 //by JUNIORCEDE(Francisco Bermello)
 router.post('/empleados',ensureAuthenticated,function(req,res){
-	var storage = multer.diskStorage({
-		destination: function (req, file, cb) {cb(null, 'recursos/general/imagenes/empleados')},
-			filename: function (req, file, cb) {cb(null, 'empleado'+(req.body.Ced_Emp)+'.png')}
-		});
-	var upload = multer({ storage: storage,fileFilter:function(req,file,cb){
-		if(file.mimetype=='image/png'|| file.mimetype=='image/jpg' || file.mimetype=='image/jpeg'){cb(null, true);}else{cb(null, false);}
-	}}).single('image_producto');
-	upload(req, res, function (err) {
-		if(err){res.render('500',{error:'Error al cargar la imágen'})}else{
-			var objeto = {
-				Ced_Emp: req.body.Ced_Emp,
-				Nomb_Emp: req.body.Nomb_Emp,
-				Telf_Emp: req.body.Telf_Emp,
-				Img_Emp:"../general/imagenes/empleados/empleado"+(req.body.Ced_Emp)+".png",
-				Tur_Emp: req.body.Tur_Emp,
-				Estd_Emp: req.body.Estd_Emp
-			}
-			var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
-			nuevoEmpleado.save(function(error,resp){
-				if(error){
-					res.render('500',{error:error})
+	var accion = req.body.accion;
+	console.log(accion)
+	if (accion) {
+		if (accion=="Eliminar") {
+			console.log("Eliminar")
+
+			var cedula = req.body.Ced_Emp;
+			var query = {'Ced_Emp': cedula};
+			E_DBF_EMPLEADO_OBJ.findOneAndRemove(query,function(err, userUpdated){
+				if (err) {
+					res.status(500).send({message:"Error al borrar el usuario"});
 				}else{
-					res.render('empleados',{success_msg:'Guardado'})
+					if (!userUpdated) {
+						res.status(404).send({message:"No se ha podido borrar el usuario"});
+					}else{
+						res.render('empleados',{success_msg:'Borrado'})
+					}
 				}
-			})
+			});
 		}
-	});
+		else{
+			if (accion=="Actualizar") {
+				console.log("Actualizar")
+				var cedula = req.body.Ced_Emp;
+				var objeto = {
+				    Nomb_Emp: req.body.Nomb_Emp,
+				    Telf_Emp: req.body.Telf_Emp,
+				    Tur_Emp: req.body.Tur_Emp
+				}
+				var query = {'Ced_Emp': cedula};
+				E_DBF_EMPLEADO_OBJ.findOneAndUpdate(query, objeto,{new: false},function(err, userUpdated){
+					
+					if (err) {
+						res.status(500).send({message:"Error al actualizar el usuario"});
+					}else{
+						if (!userUpdated) {
+							res.status(404).send({message:"No se ha podido actualizar el usuario"});
+						}else{
+							res.render('empleados',{success_msg:'Editado'})
+						}
+					}
+				});
+			}
+		}
+	}
+	else{
+		var storage = multer.diskStorage({
+			destination: function (req, file, cb) {cb(null, 'recursos/general/imagenes/empleados')},
+				filename: function (req, file, cb) {cb(null, 'empleado'+(req.body.Ced_Emp)+'.png')}
+			});
+		var upload = multer({ storage: storage,fileFilter:function(req,file,cb){
+			if(file.mimetype=='image/png'|| file.mimetype=='image/jpg' || file.mimetype=='image/jpeg'){cb(null, true);}else{cb(null, false);}
+		}}).single('image_producto');
+		upload(req, res, function (err) {
+			if(err){res.render('500',{error:'Error al cargar la imágen'})}else{
+				var objeto = {
+					Ced_Emp: req.body.Ced_Emp,
+					Nomb_Emp: req.body.Nomb_Emp,
+					Telf_Emp: req.body.Telf_Emp,
+					Img_Emp:"../general/imagenes/empleados/empleado"+(req.body.Ced_Emp)+".png",
+					Tur_Emp: req.body.Tur_Emp,
+					Estd_Emp: req.body.Estd_Emp
+				}
+				var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
+				nuevoEmpleado.save(function(error,resp){
+					if(error){
+						res.render('500',{error:error})
+					}else{
+						res.render('empleados',{success_msg:'Guardado'})
+					}
+				})
+			}
+		});
+	}
 })
 
 router.get('/asignar_empleados',ensureAuthenticated,function(req,res){

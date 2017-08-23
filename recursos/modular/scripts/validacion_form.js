@@ -3,12 +3,12 @@
 //indentificaciones.js
 //validation.js
 ValorOriginal={}
-function ValidarDatosFormulario(formulario) {
+function ValidarDatosFormulario(formulario,formModal) {
 	var inputs = formulario.getElementsByTagName("input");
 	mensaje="";
 	formNoValido=false;
 	for (var i = 0; i < inputs.length; i++) {
-		if(inputs[i].value.trim() == ""){
+		if(inputs[i].value.trim() == "" && inputs[i].type != "file"){
 			var span = inputs[i].parentNode.getElementsByTagName("span");
 			if (span.length>=1) {
 				span=span[0]
@@ -33,13 +33,15 @@ function ValidarDatosFormulario(formulario) {
 		}
 	};
 	if (formNoValido) {
-		swal({
-		  	title: 'Formulario No Válido',
-		  	type: 'warning',
-		  	text:mensaje,
-		  	confirmButtonText: 'Ok',
-		  	closeOnConfirm: false
-		})
+		if (!formModal) {
+			swal({
+			  	title: 'Formulario No Válido',
+			  	type: 'warning',
+			  	text:mensaje,
+			  	confirmButtonText: 'Ok',
+			  	closeOnConfirm: false
+			})
+		}
 		return false;
 	};
 	return true;
