@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 //Se crea el esquema necesario_______________________________________________________________________________________________________________
 var E_DBF_PRODUCTO_OBJ = mongoose.Schema({
-    CodigoProducto:{type: Number, required: true, unique: true},
+    Cod_Prod:{type: Number},
     Descripcion:{type:String},
     Existencia:{type:Number},
     PrecComp_Pro:{type:Number},
