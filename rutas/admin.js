@@ -128,12 +128,12 @@ router.post('/empleados',ensureAuthenticated,function(req,res){
 router.get('/asignar_empleados',ensureAuthenticated,function(req,res){
 	var empleadosDisponibles=new Array(), 
 		empleadoNoDisponibles=new Array();
-	E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'Disponible'}).exec(function(error,disponibles){
-		empleadosDisponibles=disponibles;
-		E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'No Disponible'}).exec(function(error,Nodisponibles){
-			empleadoNoDisponibles=Nodisponibles;
-			res.render('Control_Actividades');
-		});
+		E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'Disponible'}).exec(function(error,disponibles){
+			empleadosDisponibles=disponibles;
+			E_DBF_EMPLEADO_OBJ.find().where({Estd_Emp:'No Disponible'}).exec(function(error,Nodisponibles){
+				empleadoNoDisponibles=Nodisponibles;
+				res.render('Control_Actividades',{disponibles:empleadosDisponibles,noDisponibles:empleadoNoDisponibles});
+			});
 	});
 });
 module.exports = router;
