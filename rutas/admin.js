@@ -158,7 +158,6 @@ router.post('/empleados', ensureAuthenticated, function (req, res) {
 	console.log(accion)
 	if (accion) {
 		if (accion == "Eliminar") {
-			console.log("Eliminar")
 
 			var cedula = req.body.Ced_Emp;
 			var query = { 'Ced_Emp': cedula };
