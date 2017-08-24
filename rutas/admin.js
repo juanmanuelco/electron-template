@@ -85,7 +85,7 @@ router.post('/productos', function (req, res) {
 						if (!userUpdated) {
 							res.status(404).send({ message: "No se ha podido actualizar el producto" });
 						} else {
-							res.render('producto', { success_msg: 'Editado' })
+							res.render('producto', { success_msg: 'Editado correctamente' })
 						}
 					}
 				});

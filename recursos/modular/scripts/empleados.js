@@ -62,7 +62,7 @@ FuncionesEmpleados["editEmpleado"] = function () {
 	'<input type="hidden" value="Actualizar" name="accion" id="accion">'+
 	'</form>'
 	swal({
-		  	title: 'Datos Producto',
+		  	title: 'Datos Empleados',
 		 	html: formhtml,
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Guardar',
