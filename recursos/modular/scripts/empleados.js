@@ -24,11 +24,7 @@ FuncionesEmpleados={}
 //para editar datos del empleado se activa con el event click
 FuncionesEmpleados["editEmpleado"] = function () {
 	var divpadre = this.parentNode
-<<<<<<< HEAD
 	var divButton = divpadre.parentNode.parentNode
-=======
-	var divButton = divpadre.parentNode
->>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 	var datos = divButton.parentNode.getElementsByTagName("td")
 	var formhtml = '<form id="editForm" style="text-align: left;" action="/admin/empleados" method="post">'+
 	'<div class="mdl-grid">'+
@@ -66,11 +62,7 @@ FuncionesEmpleados["editEmpleado"] = function () {
 	'<input type="hidden" value="Actualizar" name="accion" id="accion">'+
 	'</form>'
 	swal({
-<<<<<<< HEAD
-		  	title: 'Datos Producto',
-=======
 		  	title: 'Datos Empleados',
->>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 		 	html: formhtml,
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Guardar',
@@ -142,11 +134,7 @@ FuncionesEmpleados["saveEmpleado"] = function (e){
 FuncionesEmpleados["deleteEmpleado"] = function () {
 
 	var divpadre = this.parentNode
-<<<<<<< HEAD
-	var divButton = divpadre.parentNode.parentNode
-=======
 	var divButton = divpadre.parentNode
->>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 	var datos = divButton.parentNode.getElementsByTagName("td")
 	var infoHTML = '<form id="deleteForm" action="/admin/empleados" method="post"><label>Cedula: '+datos[0].innerHTML+
 	'</label><br><label>Nombre: '+datos[1].innerHTML+'</label>';
