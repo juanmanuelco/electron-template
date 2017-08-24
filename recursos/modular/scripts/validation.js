@@ -333,45 +333,46 @@ function dataTable(j,array){
 
 //funcion unicamente llamada en el modulo de productos en la parte de inventario
 //para editar datos del inv se activa con el event click
-Funciones["editProduct"] = function () {
-	var divpadre = this.parentNode
-	var divButton = divpadre.parentNode
-	var datos = divButton.parentNode.getElementsByTagName("td")
-	var formhtml = '<form style="text-align: left;">'+
-	'<label>Codigo de Producto</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'" disabled="true"><br>'+
-	'<label style="text-align: left;">Nombre de Producto: </label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[0].innerHTML+'" ><br>'+
-	'<label>Stock</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[2].innerHTML+'"><br>'+
-	'<label>Precio</label>'+
-	'<input class="mdl-textfield__input" type="text" value="'+datos[3].innerHTML+'"><br>'+
-	'</form>'
-	swal({
-		  	title: 'Datos Producto',
-		 	html: formhtml,
-		  	showCancelButton: true,
-		  	confirmButtonText: 'Guardar',
-		  	closeOnConfirm: false
-		},
-		function(isConfirm) {
-		  	if (isConfirm) {
-		    	swal({
-			  	title: '¿Seguro que desea modificar los datos del producto?',
-			  	type: 'warning',
-			  	showCancelButton: true,
-			  	confirmButtonText: 'Si',
-			  	cancelButtonText:'No'
+// Funciones["editProduct"] = function () {
+// 	var divpadre = this.parentNode
+// 	var divButton = divpadre.parentNode
+// 	var datos = divButton.parentNode.getElementsByTagName("td")
+// 	var formhtml = '<form style="text-align: left;">'+
+// 	'<label>Codigo de Producto</label>'+
+// 	'<input class="mdl-textfield__input" type="text" value="'+datos[1].innerHTML+'" disabled="true"><br>'+
+// 	'<label style="text-align: left;">Nombre de Producto: </label>'+
+// 	'<input class="mdl-textfield__input" type="text" value="'+datos[0].innerHTML+'" ><br>'+
+// 	'<label>Stock</label>'+
+// 	'<input class="mdl-textfield__input" type="text" value="'+datos[2].innerHTML+'"><br>'+
+// 	'<label>Precio</label>'+
+// 	'<input class="mdl-textfield__input" type="text" value="'+datos[3].innerHTML+'"><br>'+
+// 	'</form>'
+// 	swal({
+// 		  	title: 'Datos Producto',
+// 		 	html: formhtml,
+// 		  	showCancelButton: true,
+// 		  	confirmButtonText: 'Guardar',
+// 		  	closeOnConfirm: false
+// 		},
+// 		function(isConfirm) {
+// 		  	if (isConfirm) {
+// 		    	swal({
+// 			  	title: '¿Seguro que desea modificar los datos del producto?',
+// 			  	type: 'warning',
+// 			  	showCancelButton: true,
+// 			  	confirmButtonText: 'Si',
+// 			  	cancelButtonText:'No'
 
-			},
-			function(isConfirm) {
-			  	if (isConfirm) {
-			    	location.reload(); 
-			  	}
-			}); 
-		  	}
-		});
-}
+// 			},
+// 			function(isConfirm) {
+// 			  	if (isConfirm) {
+// 			    	document.body.appendChild(form);
+// 					form.submit(); 
+// 			  	}
+// 			}); 
+// 		  	}
+// 		});
+// }
 
 //funcion unicamente llamada en el modulo de productos en la parte de inventario
 //para borrar datos del inv se activa con el event click
@@ -380,20 +381,36 @@ Funciones["deleteProduct"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
-	var infoHTML = '<label>Nombre: '+datos[0].innerHTML+'</label><br><label>Codigo: '+datos[1].innerHTML+'</label>';
+	var infoHTML = '<form id="deleteForm" action="/admin/productos" method="post"><label>Código: '+datos[0].innerHTML+
+	'</label><br><label>Descripción: '+datos[1].innerHTML+'</label>';
+	infoHTML+='<input type="hidden" name="Cod_Prod" id="Cod_Prod" type="number" value="'+
+	datos[0].innerHTML+'" readonly="readonly"><input type="hidden" value="Eliminar" name="accion" id="accion"></form>';
 	swal({
-	  	title: '¿Seguro que desea eliminar los datos del producto?',
-	  	html: infoHTML,
-	  	type: 'warning',
-	  	showCancelButton: true,
-	  	confirmButtonText: 'Si'
+		title: '¿Seguro que desea eliminar los datos de este Producto?',
+		html: infoHTML,
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si'
 
-	},
-	function(isConfirm) {
-	  	if (isConfirm) {
-	    	location.reload(); 
-	  	}
-	}); 
+  },
+  function(isConfirm) {
+		if (isConfirm) {
+			var divs = document.getElementsByTagName("div")
+				var form;
+				for (var i = 0; i < divs.length; i++) {
+					if (divs[i].className=="sweet-content") {
+						if (divs[i].firstChild.id=="deleteForm") {
+							form=divs[i].firstChild;
+							break;
+						};
+					};
+				};
+			if (form) {
+				document.body.appendChild(form);
+				form.submit()
+			};
+		}
+  }); 
 }
 
 //funcion unicamente llamada en el modulo de empleado
@@ -438,7 +455,7 @@ Funciones["editEmpleado"] = function () {
 	'<input type="hidden" value="Actualizar" name="accion" id="accion">'+
 	'</form>'
 	swal({
-		  	title: 'Datos Producto',
+		  	title: 'Datos Empleado',
 		 	html: formhtml,
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Guardar',
@@ -707,7 +724,67 @@ Funciones["soloLetras"] = function (e) {
 		},1,this);
 	}
 }
+// //modal editar producto
+Funciones["editProducto"] = function () {
+	var divpadre = this.parentNode
+	var divButton = divpadre.parentNode
+	var datos = divButton.parentNode.getElementsByTagName("td")
+	var formhtml = '<form id="editForm" style="text-align: left;" action="/admin/productos" method="post">'+
+	'<label style="text-align: left;">Código del Producto: </label>'+
+	'<input class="mdl-textfield__input"  name="Cod_Prod" id="Ced_Emp" type="number" value="'+datos[0].innerHTML+'" readonly="readonly"><br>'+
+	'<label>Descripción</label>'+
+	'<input class="mdl-textfield__input"  name="Des_Prod" id="Des_Prod" type="text" value="'+datos[1].innerHTML+'"><br>'+
+	'<label>Existencia</label>'+
+	'<input class="mdl-textfield__input" name="Exis_Prod" id="Exis_Prod" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<label>Precio de la compra</label>'+
+	'<input class="mdl-textfield__input" name="PrecComp_Pro" id="PrecComp_Pro" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<label>Precio de la Venta</label>'+
+	'<input class="mdl-textfield__input" name="PrecVen_Pro" id="PrecVen_Pro" type="number" value="'+datos[2].innerHTML+'"><br>'+
+	'<label id="labelFormModal" style="display:none">Por favor asegurese que todos los datos del formulario son correctos </label>'+
+	'<input type="hidden" value="Actualizar" name="accion" id="accion">'+
+	'</form>'
+	swal({
+		title: 'Datos Producto',
+	   html: formhtml,
+		showCancelButton: true,
+		confirmButtonText: 'Guardar',
+		closeOnConfirm: false
+  },
+  function(isConfirm) {
+		if (isConfirm) {
+			var divs = document.getElementsByTagName("div")
+			var form;
+			for (var i = 0; i < divs.length; i++) {
+				if (divs[i].className=="sweet-content") {
+					if (divs[i].firstChild.id=="editForm") {
+						form=divs[i].firstChild;
+						break;
+					};
+				};
+			};
+			var bool;
+			if (form) {bool = ValidarDatosFormulario(form,true)}
+			if (form && !bool) {
+				document.getElementById("labelFormModal").style.display="block";
+				return false;
+			};
+		  swal({
+			title: '¿Seguro que desea modificar los datos del Producto?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Si',
+			cancelButtonText:'No'
 
+		  },
+		  function(isConfirm) {
+				if (isConfirm) {
+					document.body.appendChild(form);
+					form.submit();
+				}
+		  }); 
+		}
+  });
+}
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();
