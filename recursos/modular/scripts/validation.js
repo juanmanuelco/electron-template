@@ -304,22 +304,6 @@ Funciones["deleteProduct"] = function () {
 	var divpadre = this.parentNode
 	var divButton = divpadre.parentNode
 	var datos = divButton.parentNode.getElementsByTagName("td")
-<<<<<<< HEAD
-	var infoHTML = '<label>Nombre: '+datos[0].innerHTML+'</label><br><label>Codigo: '+datos[1].innerHTML+'</label>';
-	swal({
-	  	title: '¿Seguro que desea eliminar los datos del producto?',
-	  	html: infoHTML,
-	  	type: 'warning',
-	  	showCancelButton: true,
-	  	confirmButtonText: 'Si'
-
-	},
-	function(isConfirm) {
-	  	if (isConfirm) {
-	    	location.reload(); 
-	  	}
-	}); 
-=======
 	var infoHTML = '<form id="deleteForm" action="/admin/productos" method="post"><label>Código: '+datos[0].innerHTML+
 	'</label><br><label>Descripción: '+datos[1].innerHTML+'</label>';
 	infoHTML+='<input type="hidden" name="Cod_Prod" id="Cod_Prod" type="number" value="'+
@@ -350,7 +334,6 @@ Funciones["deleteProduct"] = function () {
 			};
 		}
   }); 
->>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 }
 
 
@@ -513,9 +496,6 @@ Funciones["soloLetras"] = function (e) {
 		},1,this);
 	}
 }
-<<<<<<< HEAD
-
-=======
 // //modal editar producto
 Funciones["editProducto"] = function () {
 	var divpadre = this.parentNode
@@ -577,7 +557,6 @@ Funciones["editProducto"] = function () {
 		}
   });
 }
->>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 
 //inicializa la funcion que recorre el html en busca de los elementos con los atributos explicados
 Funciones.init();
