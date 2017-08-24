@@ -150,9 +150,7 @@ router.get('/registro_empleado', ensureAuthenticated, function (req, res) {
 	});
 });
 
-
-//por ahora estoy haciendo esto para guardar los datos del empleado aun no implemento lo de la foto
-//by JUNIORCEDE(Francisco Bermello)
+/*
 router.post('/empleados', ensureAuthenticated, function (req, res) {
 	var accion = req.body.accion;
 	console.log(accion)
@@ -229,6 +227,40 @@ router.post('/empleados', ensureAuthenticated, function (req, res) {
 			}
 		});
 	}
+})
+*/
+
+//Este codigo funciona para la subida, generen dos rutas mas una para actualizar y otra para eliminar NO TODO AHI MISMO
+//Sino preguntenle a Jairo lo que pasa si pones todo en el mismo lugar :v 
+router.post('/empleados', ensureAuthenticated, function (req, res) {
+	var storage = multer.diskStorage({
+		destination: function (req, file, cb) {cb(null, 'recursos/general/imagenes/empleados')},
+			filename: function (req, file, cb) {cb(null, 'empleado'+(req.body.Ced_Emp)+'.png')}
+		});
+	var upload = multer({ storage: storage,fileFilter:function(req,file,cb){
+		if(file.mimetype=='image/png'|| file.mimetype=='image/jpg' || file.mimetype=='image/jpeg'){cb(null, true);}else{cb(null, false);}
+	}}).single('image_producto');
+	upload(req, res, function (err) {
+		if(err){res.render('500',{error:'Error al cargar la imágen'})}else{
+			var objeto = {
+				Ced_Emp: req.body.Ced_Emp,
+				Nomb_Emp: req.body.Nomb_Emp,
+				Telf_Emp: req.body.Telf_Emp,
+				Img_Emp:"../general/imagenes/empleados/empleado"+(req.body.Ced_Emp)+".png",
+				Tur_Emp: req.body.Tur_Emp,
+				Estd_Emp: req.body.Estd_Emp
+			}
+			var nuevoEmpleado = new E_DBF_EMPLEADO_OBJ(objeto)
+			nuevoEmpleado.save(function(error,resp){
+				if(error){
+					res.render('500',{error:error})
+				}else{
+					res.render('empleados',{success_msg:'Guardado'})
+				}
+			})
+		}
+});
+	
 })
 
 router.get('/asignar_empleados', ensureAuthenticated, function (req, res) {
