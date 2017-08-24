@@ -3,12 +3,12 @@
 //indentificaciones.js
 //validation.js
 ValorOriginal={}
-function ValidarDatosFormulario(formulario) {
+function ValidarDatosFormulario(formulario,formModal) {
 	var inputs = formulario.getElementsByTagName("input");
 	mensaje="";
 	formNoValido=false;
 	for (var i = 0; i < inputs.length; i++) {
-		if(inputs[i].value.trim() == ""){
+		if(inputs[i].value.trim() == "" && inputs[i].type != "file"){
 			var span = inputs[i].parentNode.getElementsByTagName("span");
 			if (span.length>=1) {
 				span=span[0]
@@ -25,21 +25,26 @@ function ValidarDatosFormulario(formulario) {
 			mensaje="Por favor asegurese que no haya campos vacios";
 		}
 	};	
-	var divs = formulario.getElementsByTagName("div")
-	for (var i = 0; i < divs.length; i++) {
-		if(divs[i].classList.contains("is-invalid")){
-			mensaje="Por favor asegurese que todos los datos estén correctos";
-			formNoValido=true;
-		}
+	if (!formNoValido) {
+		var divs = formulario.getElementsByTagName("div")
+		for (var i = 0; i < divs.length; i++) {
+			if(divs[i].classList.contains("is-invalid")){
+				mensaje="Por favor asegurese que todos los datos estén correctos";
+				formNoValido=true;
+			}
+		};
 	};
+	
 	if (formNoValido) {
-		swal({
-		  	title: 'Formulario No Válido',
-		  	type: 'warning',
-		  	text:mensaje,
-		  	confirmButtonText: 'Ok',
-		  	closeOnConfirm: false
-		})
+		if (!formModal) {
+			swal({
+			  	title: 'Formulario No Válido',
+			  	type: 'warning',
+			  	text:mensaje,
+			  	confirmButtonText: 'Ok',
+			  	closeOnConfirm: false
+			})
+		}
 		return false;
 	};
 	return true;

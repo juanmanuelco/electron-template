@@ -9,7 +9,8 @@ var E_DBF_EMPLEADO_OBJ  = mongoose.Schema({
     Nomb_Emp: String,
     Telf_Emp:Number,
     Tur_Emp: String,
-    Estd_Emp: String
+    Estd_Emp: String,
+    Img_Emp:String
 });
 
 //Exporta el esquema para poder ser usado en cada ruta que sea  necesario____________________________________________________________________

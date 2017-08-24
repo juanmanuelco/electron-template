@@ -8,36 +8,45 @@
 							Nuevo Empleado
 						</div>
 						<div class="full-width panel-content">
-							<form action="/admin/empleados" method="post">
-								
+							<form action="/admin/empleados" method="post" enctype="multipart/form-data">
 								<div class="mdl-grid">
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 										<br>
+										<div class="mdl-grid">
+												<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+													<label class="text-condensedLight" style="font-size:20px;">Foto del empleado</label>
+													<div class="div_file btn">
+														<p class="texto">Escoger imágen (102x102) </p>
+														<input type="file" class="btn_enviar mdl-textfield__input" id="file_url" accept=".jpg,.png," name="image_producto" onchange="alertaOferta(this,this.files[0].size)"
+														required >
+													</div>
+												</div>
+												<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+													<div id="poder" style="display: none;margin:0 auto; border:solid #000000; height:108px; width:108px;">
+														<img style="" src="" height="102px" width="102px" id="img_destino">		
+													</div>
+												</div>
+										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" style="font-size:20px;">Cédula</label>
-											<input class="mdl-textfield__input" type="text" id="Ced_Emp" name="Ced_Emp" validation="cedula" event="keyup" solonum="true" EnterNext="true" idNext="Nomb_Emp">
+											<input class="mdl-textfield__input" solonum="true" type="text" id="Ced_Emp" name="Ced_Emp" validation="cedula" event="keyup"  EnterNext="true" idNext="Nomb_Emp" maxlength="10">
 											<label class="mdl-textfield__label" for="Ced_Emp"></label>
 											<span class="mdl-textfield__error">Ingrese Solo Números en Cédula</span>
 							    		</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" style="font-size:20px;">Nombre</label>
-											<input class="mdl-textfield__input" type="text" id="Nomb_Emp" name="Nomb_Emp" EnterNext="true" idNext="Telf_Emp">
+											<input class="mdl-textfield__input" type="text" id="Nomb_Emp" name="Nomb_Emp" EnterNext="true" idNext="Telf_Emp" soloLetras="true">
 											<label class="mdl-textfield__label" for="Nomb_Emp"></label>
-											<span class="mdl-textfield__error">Ingrese solo letras </span>
-										</div>
-										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-											<label class="text-condensedLight" style="font-size:20px;">Teléfono</label>
-											<input class="mdl-textfield__input" type="text" id="Telf_Emp" name="Telf_Emp" solonum="true" EnterNext="true" idNext="Tur_Emp">
-											<label class="mdl-textfield__label" for="Telf_Emp"></label>
-											<span class="mdl-textfield__error">Ingrese solo números</span>
+											<span class="mdl-textfield__error">Solo se permite caracteres de la a a la z con tildes y espacios</span>
 										</div>
 									</div>
 									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-										<div>
-											<div style="border:solid #000000; height:102px; width:102px;">
-												<img name="foto" id="foto" src="../general/imagenes/avatar-male.png" style="height:95px; width:95px;">
-											</div>
-											<!--<input name="myFile" type="file">-->
+										
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+											<label class="text-condensedLight" style="font-size:20px;">Teléfono</label>
+											<input class="mdl-textfield__input" type="text" id="Telf_Emp" name="Telf_Emp" solonum="true" EnterNext="true" idNext="Tur_Emp" maxlength="10">
+											<label class="mdl-textfield__label" for="Telf_Emp"></label>
+											<span class="mdl-textfield__error">Ingrese solo números</span>
 										</div>
 										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 											<label class="text-condensedLight" id="Turno" style="font-size:20px;">Turno</label>
@@ -86,13 +95,30 @@
 							<tr>
 								<th>Cedula</th>
 								<th>Nombre</th>
-								<th>Telefono</th>
 								<th>Turno</th>
-								<th>Estado</th>
 								<th><center>Opcion</center></th>
 							</tr>
 						</thead>
 						<tbody id="contenidoTabla">
+							{{#if usuarios}}{{#each usuarios}}
+							<tr>
+							<td>{{this.Ced_Emp}}</td>
+							<td>{{this.Nomb_Emp}}</td>
+							<td>{{this.Tur_Emp}}</td>
+							<td>
+								<div>
+									<center><button title="Más Informacion" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#FF9800" class="zmdi zmdi-info"></i></button>&nbsp;&nbsp;&nbsp;
+									<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
+									</center>
+								</div>
+							</td>
+							</tr>
+                            {{/each}}
+                            {{else}}
+                            <tr>
+								<td colspan="6"><center>No hay datos para mostrar</center></td>
+							</tr>
+                            {{/if}}
 						</tbody>
 					</table>
 				</div>
@@ -106,29 +132,5 @@
 <script src="../modular/scripts/indentificaciones.js" ></script>
 <script src="../modular/scripts/validacionPrecios.js" ></script>
 <script src="../modular/scripts/validation.js" ></script>
-<script type="text/javascript">
-	$.get("getEmpleados", function(data){
-	tabla=""
-	contenido = document.getElementById("contenidoTabla");
-	  for(var a in data){
-	  	var datos = data[a]
-	  	tabla+='<tr>'
-		tabla+='<td>'+datos.Ced_Emp+'</td>'
-		tabla+='<td>'+datos.Nomb_Emp+'</td>'
-		tabla+='<td>'+datos.Telf_Emp+'</td>'
-		tabla+='<td>'+datos.Tur_Emp+'</td>'
-		tabla+='<td>'+datos.Estd_Emp+'</td>'
-		tabla+='<td>'
-				tabla+='<div>'
-					tabla+='<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editEmpleado" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteEmpleado" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>'
-				tabla+='</div>'
-			tabla+='</td>'
-			tabla+='<td style="display:none;">'
-			tabla+='sadasdsadsadsadsa'
-			tabla+='</td>'
-		tabla+='</tr>'
-	  }
-	contenido.innerHTML=tabla;
-	Funciones.init();
-	});
-</script>
+<script src="../modular/scripts/empleados.js"></script>
+<link rel="stylesheet" href="../modular/estilos/empleados.css">

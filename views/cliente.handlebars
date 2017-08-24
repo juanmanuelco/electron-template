@@ -9,51 +9,50 @@
 								Nuevo Cliente
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form action="/admin/saveClient" method="post">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 			 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Ruc/Cédula</label>
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9- ]*(\.[0-9]+)?" id="BarCode" validation="cedruc" event="keyup">
-												<label class="mdl-textfield__label" for="BarCode"></label>
+												<input class="mdl-textfield__input" type="text" name="Ced_Clien" id="Ced_Clien" solonum="true" validation="cedruc" event="keyup">
+												<label class="mdl-textfield__label" for="Ced_Clien"></label>
 												<span class="mdl-textfield__error">Ingrese Solo Números en Ruc/Cédula de Cliente</span>
 								    		</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<label class="text-condensedLight" style="font-size:20px;">Nombre</label>
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameClient">
-												<label class="mdl-textfield__label" for="NameClient"></label>
-												<span class="mdl-textfield__error">Ingrese solo letras </span>
+												<label class="text-condensedLight" style="font-size:20px;">Nombres</label>
+												<input class="mdl-textfield__input" type="text" name="Nomb_Clien" id="Nomb_Clien" soloLetras="true">
+												<label class="mdl-textfield__label" for="Nomb_Clien"></label>
+												<span class="mdl-textfield__error">Solo se permite caracteres de la a a la z con tildes y espacios</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Direccion</label>
-												<input class="mdl-textfield__input" type="text" id="addressClient1">
-												<label class="mdl-textfield__label" for="addressClient1"></label>
+												<input class="mdl-textfield__input" type="text" name="DirCiud_Clien" id="DirCiud_Clien">
+												<label class="mdl-textfield__label" for="DirCiud_Clien"></label>
 												<span class="mdl-textfield__error">Direccion no válida</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Celular/Convencional</label>
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9+()-]*(\.[0-9]+)?" id="NumeroConvencional">
-												<label class="mdl-textfield__label" for="NumeroConvencional"></label>
+												<input class="mdl-textfield__input" type="number" name="Telf_Clien" id="Telf_Clien">
+												<label class="mdl-textfield__label" for="Telf_Clien" solonum="true"></label>
 												<span class="mdl-textfield__error">Ingrese solo números</span>
 											</div>
 										</div>
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 			 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<label class="text-condensedLight" style="font-size:20px;">Correo electronico</label>
-												<input class="mdl-textfield__input" type="text" id="Correo" validation="email" event="keyup">
-												<label class="mdl-textfield__label" for="Correo"></label>
+												<input class="mdl-textfield__input" type="text" name="CorElec_Clien" id="CorElec_Clien" validation="email" event="keyup">
+												<label class="mdl-textfield__label" for="CorElec_Clien"></label>
 												<span class="mdl-textfield__error">Correo No válido</span>
 											</div>
 												<label class="text-condensedLight" style="font-size:20px;">Tipo Cliente</label>
 											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Seleccione tipo </option>
-													<option value="">Ocasional</option>
-													<option value="">Premium</option>
+												<select class="mdl-textfield__input" name="Tipo_Clien" id="Tipo_Clien">
+													<option value="Ocasional">Ocasional</option>
+													<option value="Premium">Premium</option>
 												</select>
 											</div>
 											<div align="center">
-		                                       <button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;">Guardar</button>
+		                                       <button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" validation="saveClient" event="click">Guardar</button>
 		                                       <button id="btn-addClient" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:left;" id="Consultar" validation="ocultarmostrar" mostrarID="divTabla" ocultarID="tabNewAdmin" event="click" title="Mostrar Cliente Registrados">Ver Clientes Registrados</button>
 		                                   	</div>
 										</div>
@@ -93,64 +92,27 @@
 								</tr>
 							</thead>
 							<tbody>
+								{{#if clientes}}{{#each clientes}}
 								<tr>
-									<td>1309953576001</td>
-									<td>Francisco Xavier Bermello López</td>
-									<td>Calle 17 av 25 y 26</td>
-									<td>5003572</td>
-									<td>juniorcede2@hotmail.com</td>
-									<td>Premium</td>
-									<td>50 %</td>
+									<td>{{this.Ced_Clien}}</td>
+									<td>{{this.Nomb_Clien}}</td>
+									<td>{{this.DirCiud_Clien}}</td>
+									<td>{{this.Telf_Clien}}</td>
+									<td>{{this.CorElec_Clien}}</td>
+									<td>{{this.Tipo_Clien}}</td>
+									<td>{{this.PorcDesc_Clien}}</td>
 									<td id="tr1">
 										<div style="display:block;" id="div1">
 											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td>1316455524001</td>
-									<td>Maritza Jenifer Moreira Mera</td>
-									<td>Manta</td>
-									<td>5003572</td>
-									<td>correo@correo.com</td>
-									<td>Ocasional</td>
-									<td>0</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
+	                            {{/each}}
+	                            {{else}}
+	                            <tr>
+									<td colspan="8"><center>No hay datos para mostrar</center></td>
 								</tr>
-
-								<tr>
-									<td>1316458650</td>
-									<td>Andy Lenin Castillo de Arteaga</td>
-									<td>Montecristi</td>
-									<td>231937</td>
-									<td>correo@correo.com</td>
-									<td>Premium</td>
-									<td>5</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
-
-								<tr>
-									<td>1312718800</td>
-									<td>Jose Cedeño</td>
-									<td>Manta</td>
-									<td>5003572</td>
-									<td>correo@correo.com</td>
-									<td>Standar</td>
-									<td>0</td>
-									<td id="tr2">
-										<div style="display:block;">
-											<button title="modificar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" validation="editClient" event="click"><i style="color:#3f51b5" class="zmdi zmdi-edit"></i></button>&nbsp;&nbsp;&nbsp;<button validation="deleteClient" event="click" id="borrarClient" title="borrar" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i style="color:#B71C1C" class="zmdi zmdi-delete"></i></button>
-										</div>
-									</td>
-								</tr>
+	                            {{/if}}
 							</tbody>
 						</table>
 					</div>
@@ -162,7 +124,8 @@
 		</div>
 
 	</section>
-
-
+	<script src="../modular/scripts/validacion_form.js" ></script>
+<script src="../modular/scripts/validacionPrecios.js" ></script>
 	<script src="../modular/scripts/indentificaciones.js" ></script>
 	<script src="../modular/scripts/validation.js" ></script>
+	<script src="../modular/scripts/clientes.js" ></script>
