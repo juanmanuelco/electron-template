@@ -25,6 +25,10 @@ function ValidarDatosFormulario(formulario,formModal) {
 			mensaje="Por favor asegurese que no haya campos vacios";
 		}
 	};	
+<<<<<<< HEAD
+=======
+	/* Habia un error aqui hay que evitar preguntar de esta forma por el input type file
+>>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 	if (!formNoValido) {
 		var divs = formulario.getElementsByTagName("div")
 		for (var i = 0; i < divs.length; i++) {
@@ -34,6 +38,10 @@ function ValidarDatosFormulario(formulario,formModal) {
 			}
 		};
 	};
+<<<<<<< HEAD
+=======
+	*/
+>>>>>>> 3afe0fe18e41d70f447a2f03364d0f77a25e7b3f
 	
 	if (formNoValido) {
 		if (!formModal) {

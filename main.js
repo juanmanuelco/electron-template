@@ -20,6 +20,7 @@ var archivos=null;
 
 ////=======================descomentar la linea de abajo para conectar a la base de datos ======================//
 mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
+//mongoose.connect('mongodb://127.0.0.1:27017/dbprueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 //mongoose.connect('mongodb://Admin:abc123.....@ds127963.mlab.com:27963/prueba',{ server: { reconnectTries: Number.MAX_VALUE } });
 // //dany:1234@ds027618.mlab.com:27618/dboprueba'
 //Estas rutas dependen de la carpeta rutas___________________________________________________________________________________________________
@@ -105,11 +106,11 @@ let mainWindow,
   icono = nativeImage.createFromPath(path.join(__dirname, 'recursos/general/imagenes/icono.png'));
 
 //Se define el menu principal independiente del HTML________________________________________________________________________________________
-/*var menu = Menu.buildFromTemplate(
+var menu = Menu.buildFromTemplate(
   [
     
   ]
-)*/
+)
 
 //Crea la ventana principal________________________________________________________________________________________________
 //Crea la ventana principal asignándole los valores necesarios
@@ -130,7 +131,7 @@ function ventanaPrincipal() {
     })
     mainWindow.loadURL('http://127.0.0.1:'+puerto+'/');
     mainWindow.on('closed', () => { mainWindow = null });
-    //Menu.setApplicationMenu(menu);
+    Menu.setApplicationMenu(menu);
     mainWindow.on('close', (event) => {
       if (aCerrar) {
         event.preventDefault();
@@ -141,19 +142,19 @@ function ventanaPrincipal() {
         message: '¿Esta seguro de cerrar el sistema?',
         detail: 'Los cambios sin guardar no estarán disponibles',
         buttons: ['Cerrar', 'No cerrar'],
-        noLink: true
+        noLink: true,
       }, (response) => {
         if (response != 1) {
           aCerrar = false;
           app.quit();
         }
-      })
+      });
+      
     });
   });
   cargando.loadURL(path.join(__dirname, 'recursos/general/imagenes/cargando.html'))
   cargando.show()
 }
-
 
 //La aplicación se inicia__________________________________________________________________________________________________
 app.on('ready', ventanaPrincipal);
